@@ -15,12 +15,12 @@ public class Utilidades {
 
 	public static String ip,port,bd,usu,pass;
 	
-	public static boolean leerFicheroConexion() {
+	public static boolean leerFicheroConexion(String nfichero) {
 		//Leo fichero de conexion y recupero los datos
 		System.out.println("Leyendo fichero");
 		try {
 	
-			FileReader fichero = new FileReader("C:\\Conexion.txt");
+			FileReader fichero = new FileReader(nfichero);
 			BufferedReader buffer = new BufferedReader(fichero);
 			
 			String linea = "";

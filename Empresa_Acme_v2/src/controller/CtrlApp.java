@@ -7,7 +7,7 @@ public class CtrlApp {
 
 	public static void start() {
 		//leer archivo de conf conex.
-		if (LogicApp.leerFicheroConexion()) {
+		if (LogicApp.leerFicheroConexion("conexion_casa.txt")) {
 			//Lanzamiento de la aplicacion
 			new view.FrmPrincipal();
 		}

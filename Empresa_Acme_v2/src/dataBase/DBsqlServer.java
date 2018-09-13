@@ -9,6 +9,7 @@ import java.sql.Statement;
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
+import javax.swing.JOptionPane;
 
 import util.Utilidades;
 import view.FrmPrincipal;
@@ -67,6 +68,7 @@ public class DBsqlServer {
 	}
 	public static CachedRowSet ejecutarQuery(String sqlQuery,Connection conexion) {
 		try {
+			System.out.println("amono");
 			Statement s = conexion.createStatement();
 			ResultSet r = s.executeQuery(sqlQuery);
 			RowSetFactory factory = RowSetProvider.newFactory();
@@ -75,8 +77,8 @@ public class DBsqlServer {
 			return rowset;
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error en la conexion a la BD" + e.getMessage(), "Error", 1);
+			System.out.println("Error en la conexion a la BD");
 			return null;
 		}
 		

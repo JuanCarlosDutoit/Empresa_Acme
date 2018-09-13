@@ -5,16 +5,14 @@ import util.Utilidades;
 
 public class LogicApp {
 
-	public static boolean leerFicheroConexion() {
+	public static boolean leerFicheroConexion(String nfichero) {
 		boolean resp;
-		resp = Utilidades.leerFicheroConexion();
+		resp = Utilidades.leerFicheroConexion(nfichero);
 		if(resp) {
 			DBsqlServer.asignarDatosConexion();
 			return resp;
 		}else {
 			return false;
 		}
-			
-		
 	}
 }
