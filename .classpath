@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Empresa_Acme_v2/src"/>
+	<classpathentry kind="lib" path="Empresa_Acme_v2/driver/mssql-jdbc-7.0.0.jre8.jar"/>
+	<classpathentry kind="output" path="Empresa_Acme_v2/bin"/>
+</classpath>
