@@ -15,7 +15,6 @@ import java.awt.Color;
 public class FrmPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public static JLabel lblConexion;
 	
 	
 	public FrmPrincipal() {
@@ -43,10 +42,6 @@ public class FrmPrincipal extends JFrame {
 		lblAcme2.setIcon(new ImageIcon("D:\\Eclipse\\eclipse-workspace\\Empresa_Acme_v2\\Coyote.jpg"));
 		lblAcme2.setBounds(0, 0, 210, 132);
 		getContentPane().add(lblAcme2);
-		
-		lblConexion = new JLabel("");
-		lblConexion.setBounds(54, 215, 137, 14);
-		getContentPane().add(lblConexion);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

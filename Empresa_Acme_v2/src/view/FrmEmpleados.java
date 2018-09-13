@@ -23,7 +23,7 @@ public class FrmEmpleados extends JFrame {
 
 	public FrmEmpleados() {
 		initialize();
-		CtrlEmpleados.rellenarListaEmpleados();
+		CtrlEmpleados.iniciaListaEmpleados();
 		setVisible(true);
 	}
 
@@ -70,9 +70,7 @@ public class FrmEmpleados extends JFrame {
 		btnBorrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//controller.CtrlEmpleados.eltoSelecc = list.getSelectedIndex();
-				controller.CtrlEmpleados.borrar();
-				//rellenarListaEmpleados();
+				CtrlEmpleados.borrarEmpleado();
 			}
 
 		});

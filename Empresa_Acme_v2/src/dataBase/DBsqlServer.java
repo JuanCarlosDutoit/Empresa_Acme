@@ -20,6 +20,21 @@ public class DBsqlServer {
 	public static String cadenaConexion;
 	public static String ip,port,bd,usu,pass;
 	
+	public static boolean testConexion() {
+		Connection test;
+		
+		System.out.println("Testing");
+		asignarDatosConexion();
+		crearCadenaConexion();
+		test = establecerConexion();
+		if(test != null) {
+			cerrarConexion(test);
+			return true;
+		}else {
+			System.out.println("Error al conectar");
+			return false;
+		}
+	}
 	public static void asignarDatosConexion() {
 		ip= Utilidades.ip;
 		port= Utilidades.port;
@@ -29,6 +44,7 @@ public class DBsqlServer {
 	}
 	public static Connection conectarBD() {
 		Connection conexion;
+		
 		crearCadenaConexion();
 		conexion = establecerConexion();
 		return conexion;
@@ -51,10 +67,8 @@ public class DBsqlServer {
 		System.out.println("Conectando a "+ cadenaConexion);
 		try {
 			conexionAux =  DriverManager.getConnection(cadenaConexion);
-			FrmPrincipal.lblConexion.setText("Conectado");
 			return conexionAux;
 		} catch (SQLException e) {
-			FrmPrincipal.lblConexion.setText("Error en conexion");
 			return null;
 		}
 	}
@@ -68,7 +82,7 @@ public class DBsqlServer {
 	}
 	public static CachedRowSet ejecutarQuery(String sqlQuery,Connection conexion) {
 		try {
-			System.out.println("amono");
+			System.out.println("Ejecutando consulta " + sqlQuery);
 			Statement s = conexion.createStatement();
 			ResultSet r = s.executeQuery(sqlQuery);
 			RowSetFactory factory = RowSetProvider.newFactory();
@@ -77,25 +91,23 @@ public class DBsqlServer {
 			return rowset;
 			
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error en la conexion a la BD" + e.getMessage(), "Error", 1);
-			System.out.println("Error en la conexion a la BD");
+			JOptionPane.showMessageDialog(null, "Error en la ejecucion de Sql." + e.getMessage(), "Error", 1);
+			System.out.println("Error en la ejecucion de Sql.");
 			return null;
 		}
 		
 	}
+	public static void ejecutarQueryUpdate(String sqlQuery, Connection conexion) {
+		int r;
+		try {
+			System.out.println("Ejecutando consulta " + sqlQuery);
+			Statement s = conexion.createStatement();
+			r = s.executeUpdate(sqlQuery);
+			JOptionPane.showMessageDialog(null, "Se ha eliminado " + r + " registros", "Info", 1);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error en la ejecucion de Sql." + e.getMessage(), "Error", 1);
+			System.out.println("Error en la ejecucion de Sql.");
+		}
+	}
 	
-	
-	/*public static CachedRowSet consultaSQL(String strSQL) throws SQLException {
-
-		Connection c = databasemanager.DBsqlServer.establecerConexion();
-		Statement s = c.createStatement();
-		ResultSet r = s.executeQuery(strSQL);
-		RowSetFactory factory = RowSetProvider.newFactory();
-		CachedRowSet rowset = factory.createCachedRowSet();
-		 
-		rowset.populate(r);
-		databasemanager.DBsqlServer.cerrarConexion(c);
-		
-		return rowset;
-	}*/
 }

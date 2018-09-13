@@ -11,7 +11,7 @@ import view.FrmEmpleados;
 
 public class LogicEmpleados {
 
-	public static DefaultTableModel rellenarListaEmpleados() {
+	public static DefaultTableModel iniciaListaEmpleados() {
 		String sqlQuery;
 		DefaultTableModel modelo;
 		Connection conexion;
@@ -31,6 +31,23 @@ public class LogicEmpleados {
 		DBsqlServer.cerrarConexion(conexion);
 		
 		return modelo;
+	}
+
+	public static void borrarEmpleado(String empleadoSelecc) {
+		String sqlQuery;
+		DefaultTableModel modelo;
+		Connection conexion;
+		
+		conexion = DBsqlServer.conectarBD();
+		sqlQuery = "DELETE" 
+				+  " FROM JCD_EMPLEADOS"
+				+  " WHERE CODIGO_EMPLEADO = " + empleadoSelecc; 
+		
+		DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+		//modelo = Utilidades.creaModeloTablas(rowset);
+		//DBsqlServer.cerrarConexion(conexion);
+		
+		//return modelo;
 	}
 
 }
