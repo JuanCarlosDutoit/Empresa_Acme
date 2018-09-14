@@ -74,20 +74,14 @@ public class FrmEmpleados extends JFrame {
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//if (list.getSelectedIndex() != -1) {
-					//controller.CtrlEmpleados.eltoSelecc = list.getSelectedIndex();
-					//new FrmEmpleado(1);
-				//}
+				CtrlEmpleados.editarEmpleado();
 			}
 		});
 
 		btnInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//if (list.getSelectedIndex() != -1) {
-					//controller.CtrlProyectos.eltoSelecc = list.getSelectedIndex();
-					//new FrmEmpleado(2);
-				//}
+				CtrlEmpleados.infoEmpleado();
 			}
 		});
 		

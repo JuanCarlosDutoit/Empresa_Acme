@@ -72,5 +72,45 @@ public class LogicEmpleado {
 		}
 		
 	}
+	public static void editarEmpleado(String nombre, String apellidos, String dni, String genero, String cargo) {
+		String sqlQuery;
+		Connection conexion;
+		CachedRowSet rowset;
+		String n_cargo;
+		
+		//Tendriamos que comprobar que los datos enviados estan correctos
+		
+		conexion = DBsqlServer.conectarBD();
+
+		try {	
+			
+			sqlQuery = "SELECT CODIGO_CARGO"
+					+  " FROM JCD_CARGOS"
+					+  " WHERE NOMBRE = '" + cargo + "'";
+			
+			rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
+			rowset.next();
+			n_cargo= rowset.getString(1);
+			
+			
+			sqlQuery = "UPDATE JCD_EMPLEADOS SET "
+					+  "NOMBRE = '"+ nombre + "',"
+					+  "APELLIDOS = '"+ apellidos + "',"
+					+  "DNI = '"+ dni + "',"
+					+  "GENERO = "+ genero + ","
+					+  "CARGO_PRINCIPAL = "+ n_cargo 
+					+ " WHERE CODIGO_EMPLEADO = " + CtrlEmpleados.empleadoSelecc;
+			
+			DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+			DBsqlServer.cerrarConexion(conexion);
+			
+			CtrlEmpleados.cargarListaEmpleados();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 }

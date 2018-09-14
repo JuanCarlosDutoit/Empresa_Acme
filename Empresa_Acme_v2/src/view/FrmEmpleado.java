@@ -17,9 +17,9 @@ import controller.CtrlEmpleado;
 public class FrmEmpleado {
 	
 	public static JDialog frame;
-	private JTextField txtNombre;
-	private JTextField txtApellidos;
-	private JTextField txtDni;
+	public static JTextField txtNombre;
+	public static JTextField txtApellidos;
+	public static JTextField txtDni;
 	public static JComboBox cbCargos;
 	public static JRadioButton rdbtnHombre;
 	public static JRadioButton rdbtnMujer;
@@ -133,7 +133,6 @@ public class FrmEmpleado {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String genero;
-				
 				if (rdbtnHombre.isSelected()) {
 					genero = "1";
 				}else {
@@ -144,25 +143,18 @@ public class FrmEmpleado {
 			}
 		
 		});
-		/*btnEditar.addActionListener(new ActionListener(){
+		btnEditar.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String dni,nombre,apellido;
-				int genero ;
-				Cargo puesto;
-				
-				dni = textField_2.getText();
-				nombre = textField.getText();
-				apellido = textField_1.getText();
+				String genero;
 				if (rdbtnHombre.isSelected()) {
-					genero = 1;
+					genero = "1";
 				}else {
-					genero = 2;
+					genero = "2";
 				}
-				puesto = (Cargo) comboBox.getSelectedItem(); 
-				controller.CtrlEmpleados.editar(dni,nombre,apellido,genero,puesto);
-				FrmEmpleados.rellenarListaEmpleados();
+				CtrlEmpleado.editarEmpleado(txtNombre.getText(),txtApellidos.getText(),txtDni.getText(),
+		                 genero,cbCargos.getSelectedItem().toString());
 			}
 		
 		});
@@ -173,7 +165,7 @@ public class FrmEmpleado {
 				frame.dispose();
 			}
 		
-		});*/
+		});
 		
 		//frame.setVisible(true);
 	}

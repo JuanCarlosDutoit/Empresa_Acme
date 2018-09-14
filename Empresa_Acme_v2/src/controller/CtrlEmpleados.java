@@ -37,6 +37,9 @@ public class CtrlEmpleados {
 	public static void editarEmpleado() {
 		CtrlEmpleado.inicio(1);
 	}
+	public static void infoEmpleado() {
+		CtrlEmpleado.inicio(2);
+	}
 
 
 

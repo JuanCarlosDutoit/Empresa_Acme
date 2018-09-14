@@ -20,6 +20,7 @@ public class LogicEmpleados {
 		sqlQuery = "SELECT CODIGO_EMPLEADO,"
 				        + "JCD_EMPLEADOS.NOMBRE AS NOMBRE,"
 				        + "APELLIDOS,"
+				        + "DNI,"
 				        + "JCD_GENEROS.NOMBRE AS GENERO,"
 				        + "JCD_CARGOS.NOMBRE AS PUESTO"
 				+  " FROM JCD_EMPLEADOS,JCD_CARGOS,JCD_GENEROS"
