@@ -25,7 +25,7 @@ public class CtrlEmpleado {
 		FrmEmpleado.frame.setVisible(true);
 	}
 	private static void rellenarDatosEmpleado() {
-		//FrmEmpleado
+//FrmEmpleado
 		
 	}
 	public static void rellenarComboCargo() {
