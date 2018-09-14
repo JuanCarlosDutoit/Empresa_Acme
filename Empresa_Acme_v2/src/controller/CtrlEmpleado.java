@@ -17,11 +17,16 @@ public class CtrlEmpleado {
 			break;
 		case 1://Editar
 			rellenarComboCargo();
+			rellenarDatosEmpleado();
 			break;
 		case 2:
 			break;
 		}
 		FrmEmpleado.frame.setVisible(true);
+	}
+	private static void rellenarDatosEmpleado() {
+		FrmEmpleado
+		
 	}
 	public static void rellenarComboCargo() {
 		CachedRowSet rowset;
