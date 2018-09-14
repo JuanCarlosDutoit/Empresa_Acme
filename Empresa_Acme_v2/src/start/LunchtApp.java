@@ -9,7 +9,7 @@ public class LunchtApp {
 	}
 
 	private void start() {
-		controller.CtrlApp.start();
+		controller.CtrlApp.inicio();
 	}
 
 }

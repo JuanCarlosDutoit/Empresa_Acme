@@ -16,15 +16,8 @@ public class FrmPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-	
 	public FrmPrincipal() {
 		
-		initialize();
-		//Se haria una comprobacion a la base de datos y si no hay pues se cargan datos
-		setVisible(true);
-	}
-
-	private void initialize() {
 		getContentPane().setBackground(Color.WHITE);
 		setTitle("MI_EMPRESA");
 		setBounds(100, 100, 450, 300);
@@ -88,5 +81,7 @@ public class FrmPrincipal extends JFrame {
 				System.exit(0);
 			}
 		});
+		
+		setVisible(true);
 	}
 }

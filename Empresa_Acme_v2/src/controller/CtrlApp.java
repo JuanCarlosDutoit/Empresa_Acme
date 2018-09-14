@@ -8,7 +8,7 @@ import util.Utilidades;
 
 public class CtrlApp {
 
-	public static void start() {
+	public static void inicio() {
 		//leer archivo de conf conex.
 		if (LogicApp.leerFicheroConexion("conexion.txt")) {
 			//Lanzamiento de la aplicacion

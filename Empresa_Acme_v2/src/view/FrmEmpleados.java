@@ -22,13 +22,7 @@ public class FrmEmpleados extends JFrame {
 	public static JTable tabEmpleados;
 
 	public FrmEmpleados() {
-		initialize();
-		CtrlEmpleados.iniciaListaEmpleados();
-		setVisible(true);
-	}
 
-	private void initialize() {
-		System.out.println("hola");
 		setAlwaysOnTop(true);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("EMPLEADOS");
@@ -65,6 +59,7 @@ public class FrmEmpleados extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//new view.FrmEmpleado(0);
+				CtrlEmpleados.addEmpleado();
 			}
 		});
 

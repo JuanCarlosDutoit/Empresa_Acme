@@ -60,7 +60,7 @@ public class Utilidades {
 		}
 			
 	}
-	public static DefaultTableModel creaModeloTablas( CachedRowSet r) {
+	public static DefaultTableModel creaModeloTablas(CachedRowSet r) {
 		
 		DefaultTableModel modelo = new DefaultTableModel();
 		ResultSetMetaData md;

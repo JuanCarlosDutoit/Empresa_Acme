@@ -42,13 +42,6 @@ public class DBsqlServer {
 		usu=Utilidades.usu;
 		pass=Utilidades.pass;
 	}
-	public static Connection conectarBD() {
-		Connection conexion;
-		
-		crearCadenaConexion();
-		conexion = establecerConexion();
-		return conexion;
-	}
 	public static void crearCadenaConexion() {
 		
 		String cadena  = "jdbc:sqlserver:";
@@ -60,8 +53,6 @@ public class DBsqlServer {
 
 		cadenaConexion = cadena;
 	}
-	
-	
 	public static Connection establecerConexion(){
 		Connection conexionAux;
 		System.out.println("Conectando a "+ cadenaConexion);
@@ -80,6 +71,13 @@ public class DBsqlServer {
 			e.printStackTrace();
 		}
 	}
+	public static Connection conectarBD() {
+		Connection conexion;
+		
+		crearCadenaConexion();
+		conexion = establecerConexion();
+		return conexion;
+	}
 	public static CachedRowSet ejecutarQuery(String sqlQuery,Connection conexion) {
 		try {
 			System.out.println("Ejecutando consulta " + sqlQuery);
@@ -94,8 +92,7 @@ public class DBsqlServer {
 			JOptionPane.showMessageDialog(null, "Error en la ejecucion de Sql." + e.getMessage(), "Error", 1);
 			System.out.println("Error en la ejecucion de Sql.");
 			return null;
-		}
-		
+		}	
 	}
 	public static void ejecutarQueryUpdate(String sqlQuery, Connection conexion) {
 		int r;
@@ -103,7 +100,7 @@ public class DBsqlServer {
 			System.out.println("Ejecutando consulta " + sqlQuery);
 			Statement s = conexion.createStatement();
 			r = s.executeUpdate(sqlQuery);
-			JOptionPane.showMessageDialog(null, "Se ha eliminado " + r + " registros", "Info", 1);
+			JOptionPane.showMessageDialog(null, "Se ha modificado " + r + " registros", "Info", 1);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error en la ejecucion de Sql." + e.getMessage(), "Error", 1);
 			System.out.println("Error en la ejecucion de Sql.");

@@ -1,5 +1,5 @@
 package model;
-// adiosssss
+
 public class Empleado {
 	private int codigo;
 	private String dni;
