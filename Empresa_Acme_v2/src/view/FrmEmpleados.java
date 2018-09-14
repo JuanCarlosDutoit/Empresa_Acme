@@ -28,6 +28,7 @@ public class FrmEmpleados extends JFrame {
 	}
 
 	private void initialize() {
+		System.out.println("hola");
 		setAlwaysOnTop(true);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("EMPLEADOS");
