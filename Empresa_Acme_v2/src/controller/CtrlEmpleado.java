@@ -25,6 +25,7 @@ public class CtrlEmpleado {
 	}
 	public static void rellenarComboCargo() {
 		CachedRowSet rowset;
+		//hola
 		System.out.println("Rellenando combo");
 		try {
 			rowset = logic.LogicEmpleado.rellenaComboCargo();
