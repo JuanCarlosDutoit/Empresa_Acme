@@ -21,13 +21,13 @@ public class FrmEquipos extends JFrame {
 
 	public static DefaultListModel<String> lista;
 	public static JTable tabEquipos;
-	private JTable tabPersonal;
+	public static JTable tabPersonal;
 
 	public FrmEquipos() {
 
 		setAlwaysOnTop(true);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
-		setTitle("EMPLEADOS");
+		setTitle("EQUIPOS");
 		setBounds(100, 100, 450, 387);
 
 		lista = new DefaultListModel<String>();
@@ -49,24 +49,32 @@ public class FrmEquipos extends JFrame {
 		btnInfo.setBounds(318, 118, 89, 23);
 		getContentPane().add(btnInfo);
 		
-		JButton BtnAsignar = new JButton("ASIGNAR");
-		BtnAsignar.setBounds(318, 152, 89, 23);
+		JButton BtnAsignar = new JButton("+");
+		BtnAsignar.setBounds(377, 241, 41, 23);
 		getContentPane().add(BtnAsignar);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 14, 271, 161);
 		getContentPane().add(scrollPane);
 		
-		tabEquipos = new JTable();
+		tabEquipos = new JTable(){
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				return false; //Las celdas no son editables.
+			}
+			};;
 		scrollPane.setViewportView(tabEquipos);
 		
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(40, 218, 345, 103);
+		scrollPane_1.setBounds(22, 218, 345, 103);
 		getContentPane().add(scrollPane_1);
 		
 		tabPersonal = new JTable();
 		scrollPane_1.setViewportView(tabPersonal);
+		
+		JButton btnQuitar = new JButton("-");
+		btnQuitar.setBounds(377, 275, 41, 23);
+		getContentPane().add(btnQuitar);
 
 		// Listeners
 		btnNuevo.addActionListener(new ActionListener() {

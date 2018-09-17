@@ -21,7 +21,9 @@ public class CtrlEmpleados {
 	}
 	public static void rellenarListaEmpleados(DefaultTableModel modelo) {
 		view.FrmEmpleados.tabEmpleados.setModel(modelo);
-		view.FrmEmpleados.tabEmpleados.getColumnModel().getColumn(0).setPreferredWidth(0);		
+		view.FrmEmpleados.tabEmpleados.getColumnModel().getColumn(0).setPreferredWidth(0);
+		
+		view.FrmEmpleados.tabEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 	public static void borrarEmpleado() {
 		int fil, col;

@@ -72,7 +72,6 @@ public class CtrlEmpleado {
 	}
 	public static void rellenarComboCargo() {
 		CachedRowSet rowset;
-		//hola
 		System.out.println("Rellenando combo");
 		try {
 			rowset = logic.LogicEmpleado.rellenaComboCargo();
@@ -80,7 +79,6 @@ public class CtrlEmpleado {
 				FrmEmpleado.cbCargos.addItem(rowset.getString(2));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("fin Rellenando combo");

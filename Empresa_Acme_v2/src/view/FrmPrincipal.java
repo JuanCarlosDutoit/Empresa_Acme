@@ -20,23 +20,24 @@ public class FrmPrincipal extends JFrame {
 	
 	public FrmPrincipal() {
 		
-		getContentPane().setBackground(Color.WHITE);
+		getContentPane().setBackground(Color.BLACK);
 		setTitle("MI_EMPRESA");
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JLabel lblAcme = new JLabel("");
+		lblAcme.setBackground(Color.BLACK);
 		//lblAcme.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\Empresa ACME\\Empresa ACME\\Acme.jpg"));
 		lblAcme.setIcon(new ImageIcon("Acme.jpg"));
-		lblAcme.setBounds(224, 143, 210, 97);
+		lblAcme.setBounds(107, 65, 210, 97);
 		getContentPane().add(lblAcme);
 		
-		JLabel lblAcme2 = new JLabel("");
+		//JLabel lblAcme2 = new JLabel("");
 		//lblAcme2.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\Empresa ACME\\Empresa ACME\\s-l300.jpg"));
-		lblAcme2.setIcon(new ImageIcon("D:\\Eclipse\\eclipse-workspace\\Empresa_Acme_v2\\Coyote.jpg"));
-		lblAcme2.setBounds(0, 0, 210, 132);
-		getContentPane().add(lblAcme2);
+		//lblAcme2.setIcon(new ImageIcon("Coyote.jpg"));
+		//lblAcme2.setBounds(0, 0, 210, 132);
+		//getContentPane().add(lblAcme2);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
