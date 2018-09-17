@@ -45,6 +45,7 @@ public class LogicEmpleados {
 				+  " WHERE CODIGO_EMPLEADO = " + empleadoSelecc; 
 		
 		DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+		DBsqlServer.cerrarConexion(conexion);
 	}
 
 }

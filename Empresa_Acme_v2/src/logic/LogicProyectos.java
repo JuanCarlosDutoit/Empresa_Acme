@@ -29,4 +29,19 @@ public class LogicProyectos {
 		return modelo;
 	}
 
+	public static void borrarProyecto(String proyectoSelecc) {
+		String sqlQuery;
+		DefaultTableModel modelo;
+		Connection conexion;
+		
+		conexion = DBsqlServer.conectarBD();
+		sqlQuery = "DELETE" 
+				+  " FROM JCD_PROYECTOS"
+				+  " WHERE CODIGO_PROYECTO = " + proyectoSelecc; 
+		
+		DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+		DBsqlServer.cerrarConexion(conexion);
+		
+	}
+
 }

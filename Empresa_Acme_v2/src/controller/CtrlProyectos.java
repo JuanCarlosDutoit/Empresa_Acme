@@ -10,7 +10,7 @@ public class CtrlProyectos {
 		cargarListaProyectos();
 	}
 
-	private static void cargarListaProyectos() {
+	public static void cargarListaProyectos() {
 		DefaultTableModel modelo;
 		modelo = logic.LogicProyectos.iniciaListaProyectos();
 		rellenarListaProyectos(modelo);
@@ -36,10 +36,10 @@ public class CtrlProyectos {
 	public static void borrarProyecto() {
 		int fil, col;
 		DefaultTableModel modelo;
-		fil = view.FrmEmpleados.tabEmpleados.getSelectedRow();
+		fil = view.FrmProyectos.tabProyectos.getSelectedRow();
 		col = 0;
 		proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fil, col));
-		logic.LogicEmpleados.borrarEmpleado(proyectoSelecc);
+		logic.LogicProyectos.borrarProyecto(proyectoSelecc);
 		cargarListaProyectos();
 	}
 }

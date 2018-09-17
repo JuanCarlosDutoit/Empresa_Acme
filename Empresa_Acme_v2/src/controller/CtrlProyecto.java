@@ -2,6 +2,7 @@ package controller;
 
 import javax.swing.table.DefaultTableModel;
 
+import view.FrmEmpleado;
 import view.FrmProyecto;
 
 public class CtrlProyecto {
@@ -51,7 +52,6 @@ public class CtrlProyecto {
 		DefaultTableModel modelo;
 		System.out.println("Relleno datos del proyecto");
 		fila = view.FrmProyectos.tabProyectos.getSelectedRow();
-		CtrlProyectos.proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 0));
 		
 		System.out.println("asignando.." + String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 1)));
 		view.FrmProyecto.txtNombre.setText(String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 1)));
@@ -60,11 +60,33 @@ public class CtrlProyecto {
 		view.FrmProyecto.txtFechaFin.setText(String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 4)));
 	}
 	public static void addProyecto() {
-		// TODO Auto-generated method stub
+		int fila;
+		String nombre,presupuesto,inicio,fin;
+		
+		fila = view.FrmProyectos.tabProyectos.getSelectedRow();
+		CtrlProyectos.proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 0));
+		
+		nombre = FrmProyecto.txtNombre.getText();
+		presupuesto = FrmProyecto.txtPresupuesto.getText();
+		inicio = FrmProyecto.txtFechaInicio.getText();
+		fin =  FrmProyecto.txtFechaFin.getText();
+		
+		logic.LogicProyecto.addEmpleado(nombre,presupuesto,inicio,fin);
 		
 	}
 	public static void editarProyecto() {
-		// TODO Auto-generated method stub
+		int fila;
+		String nombre,presupuesto,inicio,fin;
+		
+		fila = view.FrmProyectos.tabProyectos.getSelectedRow();
+		CtrlProyectos.proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 0));
+		
+		nombre = FrmProyecto.txtNombre.getText();
+		presupuesto = FrmProyecto.txtPresupuesto.getText();
+		inicio = FrmProyecto.txtFechaInicio.getText();
+		fin =  FrmProyecto.txtFechaFin.getText();
+		
+		logic.LogicProyecto.editarEmpleado(nombre,presupuesto,inicio,fin);
 		
 	}		
 	
