@@ -8,6 +8,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import controller.CtrlPrincipal;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -57,14 +59,14 @@ public class FrmPrincipal extends JFrame {
 		mntmProyectos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//controller.CtrlProyectos.inicio();
+				CtrlPrincipal.getionProyectos();
 			}
 		});
 
 		mntmTrabajadores.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controller.CtrlEmpleados.inicio();
+				CtrlPrincipal.getionTrabajadores();
 			}
 		});
 

@@ -1,19 +1,45 @@
 package controller;
 
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.table.DefaultTableModel;
 
 import view.FrmEmpleado;
-import view.FrmEmpleados;
 
 public class CtrlEmpleado {
 	
-	public static void inicio(int tipo) {
-		new view.FrmEmpleado(tipo);
-		switch(tipo) {
+	public static int state;
+	
+	public static void inicio() {
+		new view.FrmEmpleado();
+		
+		switch (controller.CtrlEmpleado.state) {
+		case 0:
+			//Nuevo
+			FrmEmpleado.btnOk.setVisible(false);
+			FrmEmpleado.btnEditar.setVisible(false);
+			break;
+		case 1:
+			//Editar
+			FrmEmpleado.btnGuardar.setVisible(false);
+			FrmEmpleado.btnOk.setVisible(false);
+			break;
+		case 2:
+			//Info
+			FrmEmpleado.btnGuardar.setVisible(false);
+			FrmEmpleado.btnEditar.setVisible(false);
+
+			FrmEmpleado.txtNombre.setEnabled(false);
+			FrmEmpleado.txtApellidos.setEnabled(false);
+			FrmEmpleado.txtDni.setEnabled(false);
+			FrmEmpleado.rdbtnHombre.setEnabled(false);
+			FrmEmpleado.rdbtnMujer.setEnabled(false);
+			FrmEmpleado.cbCargos.setEnabled(false);
+			
+			break;
+		}
+		switch(state) {
 		case 0://Nuevo
 			rellenarComboCargo();
 			break;
@@ -26,7 +52,6 @@ public class CtrlEmpleado {
 			rellenarDatosEmpleado();
 			break;
 		}
-		FrmEmpleado.frame.setVisible(true);
 	}
 	private static void rellenarDatosEmpleado() {
 		int fila;
@@ -60,12 +85,27 @@ public class CtrlEmpleado {
 		}
 		System.out.println("fin Rellenando combo");
 	}
-	public static void addEmpleado(String nombre, String apellidos, String dni, String genero, String cargo) {
+	public static void addEmpleado() {
+		String nombre,apellidos,dni,genero,cargo;
+		
+		nombre = FrmEmpleado.txtNombre.getText();
+		apellidos = FrmEmpleado.txtApellidos.getText();
+		dni = FrmEmpleado.txtDni.getText();
+		genero = FrmEmpleado.rdbtnHombre.isSelected() ? "1" : "2";
+		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString();
+		
 		logic.LogicEmpleado.addEmpleado(nombre,apellidos,dni,genero,cargo);
-		FrmEmpleado.frame.dispose();
+		
 	}
-	public static void editarEmpleado(String nombre, String apellidos, String dni, String genero, String cargo) {
+	public static void editarEmpleado() {
+		String nombre,apellidos,dni,genero,cargo;
+		
+		nombre = FrmEmpleado.txtNombre.getText();
+		apellidos = FrmEmpleado.txtApellidos.getText();
+		dni = FrmEmpleado.txtDni.getText();
+		genero = FrmEmpleado.rdbtnHombre.isSelected() ? "1" : "2";
+		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString();
+		
 		logic.LogicEmpleado.editarEmpleado(nombre,apellidos,dni,genero,cargo);
-		FrmEmpleado.frame.dispose();
 	}
 }

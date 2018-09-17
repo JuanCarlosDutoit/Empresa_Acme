@@ -13,11 +13,11 @@ public class CtrlApp {
 		if (LogicApp.leerFicheroConexion("conexion.txt")) {
 			//Lanzamiento de la aplicacion
 			if(DBsqlServer.testConexion()) {
-				new view.FrmPrincipal();
+				controller.CtrlPrincipal.inicio();
 			}else {
 				if (LogicApp.leerFicheroConexion("conexion_casa.txt")) {
 					if(DBsqlServer.testConexion()) {
-						new view.FrmPrincipal();
+						controller.CtrlPrincipal.inicio();
 					}else {
 						JOptionPane.showMessageDialog(null, "Error en la conexion a la BD", "Error", 1);
 					}

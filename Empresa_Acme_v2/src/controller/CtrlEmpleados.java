@@ -24,24 +24,25 @@ public class CtrlEmpleados {
 		view.FrmEmpleados.tabEmpleados.getColumnModel().getColumn(0).setPreferredWidth(0);		
 	}
 	public static void borrarEmpleado() {
-		int fila;
+		int fil, col;
 		DefaultTableModel modelo;
-		fila = view.FrmEmpleados.tabEmpleados.getSelectedRow();
-		empleadoSelecc = String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 0));
+		fil = view.FrmEmpleados.tabEmpleados.getSelectedRow();
+		col = 0;
+		empleadoSelecc = String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fil, col));
 		logic.LogicEmpleados.borrarEmpleado(empleadoSelecc);
 		cargarListaEmpleados();
 	}	
 	public static void addEmpleado() {
-		CtrlEmpleado.inicio(0);
+		CtrlEmpleado.state = 0;
+		CtrlEmpleado.inicio();
 	}
 	public static void editarEmpleado() {
-		CtrlEmpleado.inicio(1);
+		CtrlEmpleado.state = 1;
+		CtrlEmpleado.inicio();
 	}
 	public static void infoEmpleado() {
-		CtrlEmpleado.inicio(2);
+		CtrlEmpleado.state = 2;
+		CtrlEmpleado.inicio();
 	}
-
-
-
 
 }
