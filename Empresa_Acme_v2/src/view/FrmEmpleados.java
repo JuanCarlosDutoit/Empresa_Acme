@@ -58,7 +58,6 @@ public class FrmEmpleados extends JFrame {
 		btnNuevo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//new view.FrmEmpleado(0);
 				CtrlEmpleados.addEmpleado();
 			}
 		});

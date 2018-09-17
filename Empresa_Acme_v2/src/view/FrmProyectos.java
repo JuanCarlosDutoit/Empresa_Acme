@@ -13,6 +13,9 @@ import model.Proyecto;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controller.CtrlEmpleados;
+import controller.CtrlProyectos;
+
 public class FrmProyectos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -21,12 +24,7 @@ public class FrmProyectos extends JFrame {
 	public static JTable tabProyectos;
 
 	public FrmProyectos() {
-		initialize();
-		rellenarListaProyectos();
-		setVisible(true);
-	}
 
-	private void initialize() {
 		setAlwaysOnTop(true);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("PROYECTOS");
@@ -62,17 +60,14 @@ public class FrmProyectos extends JFrame {
 		btnNuevo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//System.out.println("Proyecto");
-				//new view.FrmProyecto(0);
+				CtrlProyectos.addProyecto();
 			}
 		});
 
 		btnBorrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//controller.CtrlProyectos.eltoSelecc = list.getSelectedIndex();
-				//controller.CtrlProyectos.borrar();
-				//rellenarListaProyectos();
+				CtrlProyectos.borrarProyecto();
 			}
 
 		});
@@ -80,31 +75,18 @@ public class FrmProyectos extends JFrame {
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//if (list.getSelectedIndex() != -1) {
-					//controller.CtrlProyectos.eltoSelecc = list.getSelectedIndex();
-					//new FrmProyecto(1);
-				//}
+				CtrlProyectos.editarProyecto();
 			}
 		});
 
 		btnInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//if (list.getSelectedIndex() != -1) {
-					//controller.CtrlProyectos.eltoSelecc = list.getSelectedIndex();
-					//new FrmProyecto(2);
-				//}
+				CtrlProyectos.infoProyecto();
 			}
 		});
 		
 		setVisible(true);
 
-	}
-
-	public static void rellenarListaProyectos() {
-		//lista.removeAllElements();
-		//for (Proyecto p : controller.CtrlProyectos.lstProyecto) {
-		//	lista.addElement(p.getNombre());
-		//}
 	}
 }

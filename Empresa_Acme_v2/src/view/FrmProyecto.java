@@ -3,49 +3,46 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import controller.CtrlEmpleado;
+import controller.CtrlProyecto;
 
-public class FrmEmpleado extends JDialog {
+
+public class FrmProyecto extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	public static JTextField txtNombre;
-	public static JTextField txtApellidos;
-	public static JTextField txtDni;
-	public static JComboBox cbCargos;
-	public static JRadioButton rdbtnHombre;
-	public static JRadioButton rdbtnMujer;
+	public static JTextField txtPresupuesto;
+	public static JTextField txtFechaInicio;
+	public static JTextField txtFechaFin;
+	
 	public static JButton btnGuardar;
 	public static JButton btnOk;
 	public static JButton btnEditar;
-	
-	public FrmEmpleado() {
+
+	public FrmProyecto() {
+		
 		setAlwaysOnTop(true);
 		setBounds(100, 100, 268, 218);
 		getContentPane().setLayout(null);
-		//setModal(true);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
 		lblNewLabel.setBounds(10, 11, 64, 14);
 		getContentPane().add(lblNewLabel);
 		
-		JLabel lblApellidos = new JLabel("Apellidos");
+		JLabel lblApellidos = new JLabel("Presupuesto");
 		lblApellidos.setBounds(10, 36, 64, 14);
 		getContentPane().add(lblApellidos);
 		
-		JLabel lblDni = new JLabel("DNI");
+		JLabel lblDni = new JLabel("Fecha_inicio");
 		lblDni.setBounds(10, 61, 64, 14);
 		getContentPane().add(lblDni);
 		
-		JLabel lblGenero = new JLabel("Genero");
+		JLabel lblGenero = new JLabel("Fecha_Fin");
 		lblGenero.setBounds(10, 86, 64, 14);
 		getContentPane().add(lblGenero);
 		
@@ -54,33 +51,20 @@ public class FrmEmpleado extends JDialog {
 		getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		txtApellidos = new JTextField();
-		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(87, 33, 139, 20);
-		getContentPane().add(txtApellidos);
+		txtPresupuesto = new JTextField();
+		txtPresupuesto.setColumns(10);
+		txtPresupuesto.setBounds(87, 33, 139, 20);
+		getContentPane().add(txtPresupuesto);
 		
-		txtDni = new JTextField();
-		txtDni.setColumns(10);
-		txtDni.setBounds(87, 58, 139, 20);
-		getContentPane().add(txtDni);
+		txtFechaInicio = new JTextField();
+		txtFechaInicio.setColumns(10);
+		txtFechaInicio.setBounds(87, 58, 139, 20);
+		getContentPane().add(txtFechaInicio);
 		
-		JLabel lblCargo = new JLabel("Cargo");
-		lblCargo.setBounds(10, 111, 64, 14);
-		getContentPane().add(lblCargo);
-		
-		
-		ButtonGroup chkSexo = new ButtonGroup();
-		
-		rdbtnHombre = new JRadioButton("Hombre");
-		rdbtnHombre.setBounds(80, 82, 75, 23);
-		getContentPane().add(rdbtnHombre);
-		
-		rdbtnMujer = new JRadioButton("Mujer");
-		rdbtnMujer.setBounds(157, 82, 69, 23);
-		getContentPane().add(rdbtnMujer);
-		
-		chkSexo.add(rdbtnHombre);
-		chkSexo.add(rdbtnMujer);
+		txtFechaFin = new JTextField();
+		txtFechaFin.setColumns(10);
+		txtFechaFin.setBounds(87, 83, 139, 20);
+		getContentPane().add(txtFechaFin);
 		
 		btnGuardar = new JButton("GUARDAR");
 		btnGuardar.setBounds(72, 145, 102, 23);
@@ -94,38 +78,34 @@ public class FrmEmpleado extends JDialog {
 		btnEditar.setBounds(72, 145, 102, 23);
 		getContentPane().add(btnEditar);
 		
-		cbCargos = new JComboBox();
-		cbCargos.setBounds(87, 108, 139, 20);
-		getContentPane().add(cbCargos);
 		
 		//Listeners
 		btnGuardar.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CtrlEmpleado.addEmpleado();
+				CtrlProyecto.addProyecto();
 				dispose();
 			}
 		
 		});
+
 		btnEditar.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
-				CtrlEmpleado.editarEmpleado();
+				CtrlProyecto.editarProyecto();
 				dispose();
 			}
 		});
+
 		btnOk.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		
 		});
-		
-		setVisible(true);
+
+		setVisible(true);		
 	}
+
 }

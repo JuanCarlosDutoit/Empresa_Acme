@@ -39,7 +39,7 @@ public class CtrlEmpleado {
 			
 			break;
 		}
-		switch(state) {
+		switch(controller.CtrlEmpleado.state) {
 		case 0://Nuevo
 			rellenarComboCargo();
 			break;
@@ -55,7 +55,7 @@ public class CtrlEmpleado {
 	}
 	private static void rellenarDatosEmpleado() {
 		int fila;
-		DefaultTableModel modelo;
+		
 		System.out.println("Relleno datos del usuario");
 		fila = view.FrmEmpleados.tabEmpleados.getSelectedRow();
 		CtrlEmpleados.empleadoSelecc = String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 0));
