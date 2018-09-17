@@ -44,5 +44,9 @@ public class CtrlEmpleados {
 		CtrlEmpleado.state = 2;
 		CtrlEmpleado.inicio();
 	}
+	public static void infoEquipos() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

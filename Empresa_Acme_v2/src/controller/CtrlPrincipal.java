@@ -11,6 +11,9 @@ public class CtrlPrincipal {
 	public static void inicio() {
 		new view.FrmPrincipal();
 	}
+	public static void gestionEquipos() {
+		controller.CtrlEquipos.inicio();
+	}
 
 
 }

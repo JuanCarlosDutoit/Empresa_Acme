@@ -46,14 +46,16 @@ public class FrmPrincipal extends JFrame {
 		mnBase.add(mntmProyectos);
 		JMenuItem mntmTrabajadores = new JMenuItem("Trabajadores");
 		mnBase.add(mntmTrabajadores);
+		JMenuItem mntmEquipos = new JMenuItem("Equipos");
+		mnBase.add(mntmEquipos);
 		JMenuItem menuItem = new JMenuItem("_______________");
 		mnBase.add(menuItem);
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mnBase.add(mntmSalir);
 		JMenu mnGestion = new JMenu("GESTION");
 		menuBar.add(mnGestion);
-		JMenuItem mntmEquipos = new JMenuItem("Equipos");
-		mnGestion.add(mntmEquipos);
+		JMenuItem mntmEquiposGestion = new JMenuItem("Equipos");
+		mnGestion.add(mntmEquiposGestion);
 
 		// Listeners
 		mntmProyectos.addActionListener(new ActionListener() {
@@ -69,8 +71,12 @@ public class FrmPrincipal extends JFrame {
 				CtrlPrincipal.getionTrabajadores();
 			}
 		});
-
 		mntmEquipos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CtrlPrincipal.gestionEquipos();
+			}
+		});
+		mntmEquiposGestion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//controller.CtrlEquipos.inicio();
