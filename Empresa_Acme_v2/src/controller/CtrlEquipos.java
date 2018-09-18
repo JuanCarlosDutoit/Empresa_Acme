@@ -18,6 +18,10 @@ public class CtrlEquipos {
 		DefaultTableModel modelo;
 		modelo = logic.LogicEquipos.iniciaListaEquipos();
 		rellenarListaEquipos(modelo);
+		//Para que se inice en la 1 fila porque la 1 vez no carga el evento del ValueChanged del listener 
+		//de la tabla
+		view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,1);
+		view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,0);
 	}
 	public static void cargarListaPersonal() {
 		DefaultTableModel modelo;
@@ -34,33 +38,47 @@ public class CtrlEquipos {
 	public static void rellenarListaEquipos(DefaultTableModel modelo) {
 		view.FrmEquipos.tabEquipos.setModel(modelo);
 		view.FrmEquipos.tabEquipos.getColumnModel().getColumn(0).setPreferredWidth(0);
-		
 		view.FrmEquipos.tabEquipos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,0);
 		
 		ListSelectionModel rowSM = view.FrmEquipos.tabEquipos.getSelectionModel();
 		rowSM.addListSelectionListener(new ListSelectionListener(){
 
 		    public void valueChanged(ListSelectionEvent e) {
-		    	System.out.println(e.toString());
-		    	equipoSelecc =String.valueOf(view.FrmEquipos.tabEquipos.getSelectedRow()+1);
-		    	cargarListaPersonal();
+		    	if (!e.getValueIsAdjusting()) {
+		    		System.out.println("Adelante");
+		    		int fila;
+		    		fila = view.FrmEquipos.tabEquipos.getSelectedRow();
+		    		System.out.println(fila);
+		    		if(fila>=0) {
+		    			equipoSelecc = String.valueOf(view.FrmEquipos.tabEquipos.getValueAt(fila,0));
+		    			cargarListaPersonal();
+		    		}
+		    	}
 		    }
 		});
 	}
+	public static void borrarEquipo() {
+		int fil, col;
+		DefaultTableModel modelo;
+		fil = view.FrmEquipos.tabEquipos.getSelectedRow();
+		col = 0;
+		equipoSelecc = String.valueOf(view.FrmEquipos.tabEquipos.getValueAt(fil, col));
+		logic.LogicEquipos.borrarEquipos(equipoSelecc);
+		cargarListaEquipos();
+	}
 
 	public static void addEquipos() {
-		// TODO Auto-generated method stub
-		
+		CtrlEquipo.state = 0;
+		CtrlEquipo.inicio();	
 	}
-
-	public static void borrarEquipos() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public static void editarEquipos() {
-		// TODO Auto-generated method stub
-		
+		CtrlEquipo.state = 1;
+		CtrlEquipo.inicio();	
+	}
+	public static void infoEquipos() {
+		CtrlEquipo.state = 2;
+		CtrlEquipo.inicio();
 	}
 
 }

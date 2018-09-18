@@ -1,8 +1,10 @@
 package logic;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.sql.rowset.CachedRowSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import controller.CtrlEquipos;
@@ -24,7 +26,6 @@ public class LogicEquipos {
 		CachedRowSet rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
 		modelo = Utilidades.creaModeloTablas(rowset);
 		DBsqlServer.cerrarConexion(conexion);
-		
 		return modelo;
 	}
 
@@ -46,6 +47,58 @@ public class LogicEquipos {
 		modelo = Utilidades.creaModeloTablas(rowset);
 		DBsqlServer.cerrarConexion(conexion);
 		return modelo;
+	}
+
+	public static void borrarEquipos(String equipoSelecc) {
+		String sqlQuery;
+		boolean elimina = false;
+		DefaultTableModel modelo;
+		Connection conexion;
+
+		try {
+			conexion = DBsqlServer.conectarBD();
+		
+			sqlQuery = "SELECT COUNT(EMPLEADO)"
+					+  " FROM JCD_PERSONAL_EQUIPOS"
+					+  " WHERE EQUIPO = " + equipoSelecc; 
+			CachedRowSet rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
+			DBsqlServer.cerrarConexion(conexion);
+			rowset.next();
+			System.out.println(rowset.getString(1));
+			if(rowset.getString(1).equals("0")) {
+				elimina = true;
+				System.out.println("No hay curritos elimino");
+			}else {
+				if(JOptionPane.showConfirmDialog(null, "Hay Personal asignado, desea continuar?","AVISO",JOptionPane.YES_NO_OPTION)==0) {
+					//Elimina el personal relacionado
+					System.out.println("Eliminamos el personal tb");
+					conexion = DBsqlServer.conectarBD();
+					sqlQuery = "DELETE" 
+							+  " FROM JCD_PERSONAL_EQUIPOS"
+							+  " WHERE EQUIPO = " + equipoSelecc; 
+					
+					DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+					DBsqlServer.cerrarConexion(conexion);
+					elimina = true;
+				}else{
+					elimina = false;
+					System.out.println("No hacemos nada");
+				};
+			}
+			if(elimina) {
+				System.out.println("Eliminamos equipo");
+				conexion = DBsqlServer.conectarBD();
+				sqlQuery = "DELETE" 
+						+  " FROM JCD_EQUIPOS"
+						+  " WHERE CODIGO_EQUIPO = " + equipoSelecc; 
+				
+				DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+				DBsqlServer.cerrarConexion(conexion);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

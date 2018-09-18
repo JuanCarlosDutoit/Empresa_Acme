@@ -15,6 +15,7 @@ import javax.swing.JTable;
 
 import controller.CtrlEmpleados;
 import controller.CtrlEquipos;
+import controller.CtrlPersonal;
 
 public class FrmEquipos extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -49,9 +50,9 @@ public class FrmEquipos extends JFrame {
 		btnInfo.setBounds(318, 118, 89, 23);
 		getContentPane().add(btnInfo);
 		
-		JButton BtnAsignar = new JButton("+");
-		BtnAsignar.setBounds(377, 241, 41, 23);
-		getContentPane().add(BtnAsignar);
+		JButton btnAsignar = new JButton("+");
+		btnAsignar.setBounds(377, 241, 41, 23);
+		getContentPane().add(btnAsignar);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 14, 271, 161);
@@ -87,7 +88,7 @@ public class FrmEquipos extends JFrame {
 		btnBorrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CtrlEquipos.borrarEquipos();
+				CtrlEquipos.borrarEquipo();
 			}
 
 		});
@@ -102,7 +103,19 @@ public class FrmEquipos extends JFrame {
 		btnInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CtrlEmpleados.infoEquipos();
+				CtrlEquipos.infoEquipos();
+			}
+		});
+		btnAsignar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CtrlPersonal.addPersona();
+			}
+		});
+		btnAsignar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CtrlPersonal.borrarPersona();
 			}
 		});
 		

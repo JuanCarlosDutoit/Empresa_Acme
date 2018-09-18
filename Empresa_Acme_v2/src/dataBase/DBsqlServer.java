@@ -29,6 +29,7 @@ public class DBsqlServer {
 		test = establecerConexion();
 		if(test != null) {
 			cerrarConexion(test);
+			System.out.println("Test OK");
 			return true;
 		}else {
 			System.out.println("Error al conectar");
@@ -55,17 +56,20 @@ public class DBsqlServer {
 	}
 	public static Connection establecerConexion(){
 		Connection conexionAux;
-		System.out.println("Conectando a "+ cadenaConexion);
+		System.out.println("Conectando a BD");
+		//System.out.println("Conectando a "+ cadenaConexion);
 		try {
 			conexionAux =  DriverManager.getConnection(cadenaConexion);
 			return conexionAux;
 		} catch (SQLException e) {
+			System.out.println(" ERROR Conectando a BD");
 			return null;
 		}
 	}
 	public static void cerrarConexion(Connection conn){
 		try {
 			conn.close();
+			System.out.println("Desonectando de BD");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
