@@ -35,7 +35,7 @@ public class LogicEquipos {
 		Connection conexion;
 		
 		conexion = DBsqlServer.conectarBD();
-		sqlQuery = "SELECT E.NOMBRE,E.APELLIDOS,C.NOMBRE PUESTO" 
+		sqlQuery = "SELECT PEQ.CODIGO_PERSONAL,E.NOMBRE,E.APELLIDOS,C.NOMBRE PUESTO" 
 				+  " FROM JCD_EMPLEADOS E INNER JOIN JCD_PERSONAL_EQUIPOS PEQ"
 			    +  "  ON E.Codigo_Empleado = PEQ.Empleado"
 				+  " INNER JOIN JCD_Equipos EQ"
@@ -99,6 +99,24 @@ public class LogicEquipos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static void borrarPersonalEquipos(String personalSelecc) {
+		String sqlQuery;
+		boolean elimina = false;
+		DefaultTableModel modelo;
+		Connection conexion;
+
+		
+		System.out.println("Eliminamos personal");
+		conexion = DBsqlServer.conectarBD();
+		sqlQuery = "DELETE" 
+				+  " FROM JCD_PERSONAL_EQUIPOS"
+				+  " WHERE CODIGO_PERSONAL = " + personalSelecc; 
+			
+		DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+		DBsqlServer.cerrarConexion(conexion);	
+		
 	}
 
 }

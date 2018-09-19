@@ -7,7 +7,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class CtrlEquipos {
 
-	public static String equipoSelecc; 
+	public static String equipoSelecc;
+	public static String personalSelecc; 
 	
 	public static void inicio() {
 		new view.FrmEquipos();
@@ -67,18 +68,30 @@ public class CtrlEquipos {
 		logic.LogicEquipos.borrarEquipos(equipoSelecc);
 		cargarListaEquipos();
 	}
-
-	public static void addEquipos() {
+	public static void addEquipo () {
 		CtrlEquipo.state = 0;
 		CtrlEquipo.inicio();	
 	}
-	public static void editarEquipos() {
+	public static void editarEquipo() {
 		CtrlEquipo.state = 1;
 		CtrlEquipo.inicio();	
 	}
-	public static void infoEquipos() {
+	public static void infoEquipo() {
 		CtrlEquipo.state = 2;
 		CtrlEquipo.inicio();
+	}
+	public static void borrarPersonalEquipo() {
+		int fil, col;
+		DefaultTableModel modelo;
+		fil = view.FrmEquipos.tabPersonal.getSelectedRow();
+		col = 0;
+		personalSelecc = String.valueOf(view.FrmEquipos.tabPersonal.getValueAt(fil, col));
+		logic.LogicEquipos.borrarPersonalEquipos(personalSelecc);
+		cargarListaEquipos();
+		
+	}
+	public static void addPersonalEquipo() {
+		CtrlPersonal.inicio();
 	}
 
 }

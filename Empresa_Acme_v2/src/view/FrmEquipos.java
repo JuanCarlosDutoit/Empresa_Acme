@@ -81,7 +81,7 @@ public class FrmEquipos extends JFrame {
 		btnNuevo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CtrlEquipos.addEquipos();
+				CtrlEquipos.addEquipo();
 			}
 		});
 
@@ -92,32 +92,31 @@ public class FrmEquipos extends JFrame {
 			}
 
 		});
-
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CtrlEquipos.editarEquipos();
+				CtrlEquipos.editarEquipo();
 			}
 		});
-
 		btnInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CtrlEquipos.infoEquipos();
+				CtrlEquipos.infoEquipo();
 			}
 		});
 		btnAsignar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CtrlPersonal.addPersona();
+				CtrlEquipos.addPersonalEquipo();
 			}
 		});
-		btnAsignar.addActionListener(new ActionListener() {
+		btnQuitar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CtrlPersonal.borrarPersona();
+				CtrlEquipos.borrarPersonalEquipo();
 			}
 		});
+
 		
 		setVisible(true);
 	}
