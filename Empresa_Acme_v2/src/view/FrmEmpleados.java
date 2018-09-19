@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import controller.CtrlEmpleados;
+import java.awt.Color;
 
 public class FrmEmpleados extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +23,7 @@ public class FrmEmpleados extends JFrame {
 	public static JTable tabEmpleados;
 
 	public FrmEmpleados() {
+		getContentPane().setBackground(Color.BLACK);
 
 		setAlwaysOnTop(true);
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);

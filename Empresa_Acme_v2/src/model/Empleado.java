@@ -9,7 +9,6 @@ public class Empleado {
 	private int puesto;
 
 	public Empleado(int codigo,String dni, String nombre, String apellido, int genero, int puesto) {
-
 		this.codigo = codigo;
 		this.dni = dni;
 		this.nombre = nombre;
@@ -20,6 +19,14 @@ public class Empleado {
 
 	public Empleado() {
 
+	}
+	
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getDni() {

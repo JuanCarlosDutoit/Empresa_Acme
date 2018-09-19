@@ -79,6 +79,8 @@ public class FrmEmpleado extends JDialog {
 		rdbtnMujer.setBounds(157, 82, 69, 23);
 		getContentPane().add(rdbtnMujer);
 		
+		rdbtnHombre.setSelected(true);
+		
 		chkSexo.add(rdbtnHombre);
 		chkSexo.add(rdbtnMujer);
 		

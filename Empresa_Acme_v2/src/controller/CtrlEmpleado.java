@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.table.DefaultTableModel;
 
+import model.Empleado;
 import view.FrmEmpleado;
 
 public class CtrlEmpleado {
@@ -19,37 +20,28 @@ public class CtrlEmpleado {
 			//Nuevo
 			FrmEmpleado.btnOk.setVisible(false);
 			FrmEmpleado.btnEditar.setVisible(false);
+			rellenarComboCargo();
 			break;
 		case 1:
 			//Editar
 			FrmEmpleado.btnGuardar.setVisible(false);
 			FrmEmpleado.btnOk.setVisible(false);
+			rellenarComboCargo();
+			rellenarDatosEmpleado();
 			break;
 		case 2:
 			//Info
 			FrmEmpleado.btnGuardar.setVisible(false);
 			FrmEmpleado.btnEditar.setVisible(false);
-
 			FrmEmpleado.txtNombre.setEnabled(false);
 			FrmEmpleado.txtApellidos.setEnabled(false);
 			FrmEmpleado.txtDni.setEnabled(false);
 			FrmEmpleado.rdbtnHombre.setEnabled(false);
 			FrmEmpleado.rdbtnMujer.setEnabled(false);
 			FrmEmpleado.cbCargos.setEnabled(false);
+			rellenarComboCargo();
+			rellenarDatosEmpleado();
 			
-			break;
-		}
-		switch(controller.CtrlEmpleado.state) {
-		case 0://Nuevo
-			rellenarComboCargo();
-			break;
-		case 1://Editar
-			rellenarComboCargo();
-			rellenarDatosEmpleado();
-			break;
-		case 2:
-			rellenarComboCargo();
-			rellenarDatosEmpleado();
 			break;
 		}
 	}
@@ -58,8 +50,6 @@ public class CtrlEmpleado {
 		
 		System.out.println("Relleno datos del usuario");
 		fila = view.FrmEmpleados.tabEmpleados.getSelectedRow();
-		CtrlEmpleados.empleadoSelecc = String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 0));
-		System.out.println(CtrlEmpleados.empleadoSelecc );
 		FrmEmpleado.txtNombre.setText(String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 1)));
 		FrmEmpleado.txtApellidos.setText(String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 2)));
 		FrmEmpleado.txtDni.setText(String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 3)));
@@ -72,11 +62,13 @@ public class CtrlEmpleado {
 	}
 	public static void rellenarComboCargo() {
 		CachedRowSet rowset;
-		System.out.println("Rellenando combo");
+		String cargo;
+		System.out.println("Rellenando combo Empleados.Cargos");
 		try {
 			rowset = logic.LogicEmpleado.rellenaComboCargo();
 			while(rowset.next()) {
-				FrmEmpleado.cbCargos.addItem(rowset.getString(2));
+				cargo = rowset.getString(1) + "-" + rowset.getString(2);
+				FrmEmpleado.cbCargos.addItem(cargo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,14 +77,24 @@ public class CtrlEmpleado {
 	}
 	public static void addEmpleado() {
 		String nombre,apellidos,dni,genero,cargo;
+		Empleado emp;
+		emp = new Empleado();
 		
-		nombre = FrmEmpleado.txtNombre.getText();
+		emp.setNombre(FrmEmpleado.txtNombre.getText());
+		emp.setApellido(FrmEmpleado.txtApellidos.getText());
+		emp.setDni(FrmEmpleado.txtDni.getText());
+		emp.setGenero(FrmEmpleado.rdbtnHombre.isSelected() ? 1 : 2);
+		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString().substring(0, FrmEmpleado.cbCargos.getSelectedItem().toString().indexOf("-"));
+		emp.setPuesto(Integer.valueOf(cargo));
+		
+		/*nombre = FrmEmpleado.txtNombre.getText();
 		apellidos = FrmEmpleado.txtApellidos.getText();
 		dni = FrmEmpleado.txtDni.getText();
 		genero = FrmEmpleado.rdbtnHombre.isSelected() ? "1" : "2";
-		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString();
-		
-		logic.LogicEmpleado.addEmpleado(nombre,apellidos,dni,genero,cargo);
+		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString().substring(0, FrmEmpleado.cbCargos.getSelectedItem().toString().indexOf("-"));
+		*/
+		//logic.LogicEmpleado.addEmpleado(nombre,apellidos,dni,genero,cargo);
+		logic.LogicEmpleado.addEmpleado(emp);
 		
 	}
 	public static void editarEmpleado() {
@@ -102,7 +104,7 @@ public class CtrlEmpleado {
 		apellidos = FrmEmpleado.txtApellidos.getText();
 		dni = FrmEmpleado.txtDni.getText();
 		genero = FrmEmpleado.rdbtnHombre.isSelected() ? "1" : "2";
-		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString();
+		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString().substring(0, FrmEmpleado.cbCargos.getSelectedItem().toString().indexOf("-"));
 		
 		logic.LogicEmpleado.editarEmpleado(nombre,apellidos,dni,genero,cargo);
 	}

@@ -62,7 +62,7 @@ public class DBsqlServer {
 			conexionAux =  DriverManager.getConnection(cadenaConexion);
 			return conexionAux;
 		} catch (SQLException e) {
-			System.out.println(" ERROR Conectando a BD");
+			System.out.println(" Error Conectando a BD");
 			return null;
 		}
 	}
@@ -100,6 +100,7 @@ public class DBsqlServer {
 	}
 	public static void ejecutarQueryUpdate(String sqlQuery, Connection conexion) {
 		int r;
+		
 		try {
 			System.out.println("Ejecutando consulta " + sqlQuery);
 			Statement s = conexion.createStatement();

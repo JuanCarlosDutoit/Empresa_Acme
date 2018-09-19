@@ -1,5 +1,6 @@
 package controller;
 
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -12,27 +13,61 @@ public class CtrlEmpleados {
 	
 	public static void inicio() {
 		new view.FrmEmpleados();
+		empleadoSelecc = "-1";
 		cargarListaEmpleados();
+		
 	}
 	public static void cargarListaEmpleados() {
 		DefaultTableModel modelo;
 		modelo = logic.LogicEmpleados.iniciaListaEmpleados();
 		rellenarListaEmpleados(modelo);
+		//1 linea como seleccionada, aqui para que salte evento
+		view.FrmEmpleados.tabEmpleados.getSelectionModel().setSelectionInterval(0,0);
 	}
 	public static void rellenarListaEmpleados(DefaultTableModel modelo) {
+		//Establezco el modelo de la tabla
 		view.FrmEmpleados.tabEmpleados.setModel(modelo);
-		view.FrmEmpleados.tabEmpleados.getColumnModel().getColumn(0).setPreferredWidth(0);
-		
+		//Oculto la columna del codigo
+		view.FrmEmpleados.tabEmpleados.getColumnModel().getColumn(0).setMaxWidth(0);
+		view.FrmEmpleados.tabEmpleados.getColumnModel().getColumn(0).setMinWidth(0);
+		view.FrmEmpleados.tabEmpleados.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+		view.FrmEmpleados.tabEmpleados.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+		//Establezco el tipo de seleccion 
 		view.FrmEmpleados.tabEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		//Añadimos Listener de cambio de valores
+		ListSelectionModel rowSM = view.FrmEmpleados.tabEmpleados.getSelectionModel();
+		rowSM.addListSelectionListener(new ListSelectionListener(){
+
+		    public void valueChanged(ListSelectionEvent e) {
+		    	if (!e.getValueIsAdjusting()) {
+		    		//Esto es porque si pincho este listener salta dos veces
+		    		int fila;
+		    		fila = view.FrmEmpleados.tabEmpleados.getSelectedRow();
+		    		if(fila>=0) {
+		    			empleadoSelecc = String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila,0));
+		    		}
+		    	}
+		    }
+		});
 	}
 	public static void borrarEmpleado() {
-		int fil, col;
+		/*int fil, col;
 		DefaultTableModel modelo;
 		fil = view.FrmEmpleados.tabEmpleados.getSelectedRow();
 		col = 0;
 		empleadoSelecc = String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fil, col));
-		logic.LogicEmpleados.borrarEmpleado(empleadoSelecc);
-		cargarListaEmpleados();
+		*/
+		//logic.LogicEmpleados.borrarEmpleado(empleadoSelecc);
+		System.out.println("quiero borrar el :" + empleadoSelecc);
+		if (!CtrlEmpleados.empleadoSelecc.equals("-1")) {
+			if(JOptionPane.showConfirmDialog(null, "Va a eliminar este registro, desea continuar?",
+					"AVISO",JOptionPane.YES_NO_OPTION)==0) {
+				logic.LogicEmpleados.borrarEmpleado();
+				cargarListaEmpleados();
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "No ha seleccionado ningun empleado", "Error", 1);
+		}
 	}	
 	public static void addEmpleado() {
 		CtrlEmpleado.state = 0;

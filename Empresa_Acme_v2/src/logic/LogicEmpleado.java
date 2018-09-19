@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.CtrlEmpleados;
 import dataBase.DBsqlServer;
+import model.Empleado;
 
 public class LogicEmpleado {
 
@@ -45,13 +46,13 @@ public class LogicEmpleado {
 			n_codigo= Integer.parseInt(rowset.getString(1));
 			n_codigo++;
 			
-			sqlQuery = "SELECT CODIGO_CARGO"
+			/*sqlQuery = "SELECT CODIGO_CARGO"
 					+  " FROM JCD_CARGOS"
 					+  " WHERE NOMBRE = '" + cargo + "'";
 			
 			rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
 			rowset.next();
-			n_cargo= rowset.getString(1);
+			n_cargo= rowset.getString(1);*/
 			
 			
 			sqlQuery = "INSERT INTO JCD_EMPLEADOS VALUES"
@@ -59,7 +60,7 @@ public class LogicEmpleado {
 					+  "'" + nombre + "',"
 					+  "'" +apellidos + "',"
 					+   genero + ","
-					+   n_cargo + ","
+					+   cargo + ","
 					+  "'" +dni + "')";
 			DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
 			DBsqlServer.cerrarConexion(conexion);
@@ -70,6 +71,57 @@ public class LogicEmpleado {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	public static void addEmpleado(Empleado emp) {
+		String sqlQuery;
+		Connection conexion;
+		CachedRowSet rowset;
+		String n_cargo;
+		int n_codigo;
+		
+		//Tendriamos que comprobar que los datos enviados estan correctos
+		
+		conexion = DBsqlServer.conectarBD();
+
+		try {	
+			
+			//--> PASAR EL CODIGO DE EMPLEADO A IDENTITY PARA EVITAR ESTO
+			sqlQuery = "SELECT MAX(CODIGO_EMPLEADO) "
+					+  " FROM JCD_EMPLEADOS";
+			
+			rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
+			rowset.next();
+			n_codigo= Integer.parseInt(rowset.getString(1));
+			n_codigo++;
+			emp.setCodigo(n_codigo);
+			
+			/*sqlQuery = "SELECT CODIGO_CARGO"
+					+  " FROM JCD_CARGOS"
+					+  " WHERE NOMBRE = '" + cargo + "'";
+			
+			rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
+			rowset.next();
+			n_cargo= rowset.getString(1);*/
+			
+			
+			sqlQuery = "INSERT INTO JCD_EMPLEADOS VALUES"
+					+  "(" + String.valueOf(n_codigo) + ","
+					+  "'" + emp.getNombre() + "',"
+					+  "'" + emp.getApellido() + "',"
+					+   emp.getGenero() + ","
+					+   emp.getPuesto() + ","
+					+  "'" + emp.getDni() + "')";
+			DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+			DBsqlServer.cerrarConexion(conexion);
+			
+			CtrlEmpleados.cargarListaEmpleados();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
 		
 	}
 	public static void editarEmpleado(String nombre, String apellidos, String dni, String genero, String cargo) {
