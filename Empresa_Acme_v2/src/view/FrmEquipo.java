@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import controller.CtrlEquipo;
-import controller.CtrlProyecto;
 import javax.swing.JTextArea;
 
 

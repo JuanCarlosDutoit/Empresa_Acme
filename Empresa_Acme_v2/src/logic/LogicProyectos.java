@@ -31,7 +31,6 @@ public class LogicProyectos {
 
 	public static void borrarProyecto(String proyectoSelecc) {
 		String sqlQuery;
-		DefaultTableModel modelo;
 		Connection conexion;
 		
 		conexion = DBsqlServer.conectarBD();

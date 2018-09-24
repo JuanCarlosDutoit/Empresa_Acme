@@ -3,7 +3,6 @@ package controller;
 import java.sql.SQLException;
 
 import javax.sql.rowset.CachedRowSet;
-import javax.swing.table.DefaultTableModel;
 
 import model.Empleado;
 import view.FrmEmpleado;
@@ -76,7 +75,8 @@ public class CtrlEmpleado {
 		System.out.println("fin Rellenando combo");
 	}
 	public static void addEmpleado() {
-		String nombre,apellidos,dni,genero,cargo;
+		String cargo;
+		
 		Empleado emp;
 		emp = new Empleado();
 		

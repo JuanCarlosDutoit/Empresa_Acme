@@ -4,14 +4,17 @@ import javax.swing.JOptionPane;
 
 import dataBase.DBsqlServer;
 import logic.LogicApp;
-import util.Utilidades;
 
 public class CtrlApp {
-
+	/**
+	 * @author Juan Carlos Duoit
+	 * @since 24/09/2018
+	 * Este método inicializa la aplicación, lee el fichero de conexion de la base de datos
+	 * y lanza el formulario de la aplicación si se ha podido realizar una conexión correcta
+	 * a la base de datos
+	 */
 	public static void inicio() {
-		//leer archivo de conf conex.
 		if (LogicApp.leerFicheroConexion("conexion.txt")) {
-			//Lanzamiento de la aplicacion
 			if(DBsqlServer.testConexion()) {
 				controller.CtrlPrincipal.inicio();
 			}else {

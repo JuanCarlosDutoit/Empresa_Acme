@@ -7,7 +7,6 @@ public class LunchtApp {
 		LunchtApp app = new LunchtApp();
 		app.start();
 	}
-
 	private void start() {
 		controller.CtrlApp.inicio();
 	}

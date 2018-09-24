@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import javax.sql.rowset.CachedRowSet;
 
-import view.FrmEmpleado;
 import view.FrmPersonal;
 
 public class CtrlPersonal {

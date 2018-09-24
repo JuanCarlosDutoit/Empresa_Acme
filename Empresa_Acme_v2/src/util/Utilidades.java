@@ -9,24 +9,26 @@ import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import view.FrmPrincipal;
-
 public class Utilidades {
 
-	public static String ip,port,bd,usu,pass;
+	public static String ip;
+	public static String port;
+	public static String bd;
+	public static String usu;
+	public static String pass;
 	
 	public static boolean leerFicheroConexion(String nfichero) {
 		//Leo fichero de conexion y recupero los datos
+		int lineasFicheroConexion = 5;
+		String linea = "";
+		
 		System.out.println("Leyendo fichero");
 		try {
 	
 			FileReader fichero = new FileReader(nfichero);
 			BufferedReader buffer = new BufferedReader(fichero);
 			
-			String linea = "";
-			int aux = 5;
-			
-			for(int i=1;i<=aux;i++) {
+			for(int i=1;i<=lineasFicheroConexion;i++) {
 				linea = buffer.readLine();
 				if (linea != null && linea.isEmpty()==false) {
 					switch(i) {
@@ -47,6 +49,7 @@ public class Utilidades {
 						break;
 					}
 				}else {
+					buffer.close();
 					JOptionPane.showMessageDialog(null, "Faltan datos en el fichero de conexion", "Error", 1);
 					return false;
 				}
@@ -55,7 +58,8 @@ public class Utilidades {
 			return true;
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error de lectura en el fichero de conexion \n" + e.getMessage(), "Error", 1);
+			JOptionPane.showMessageDialog(null, "Error de lectura en el fichero de conexion \n" 
+		                                        + e.getMessage(), "Error", 1);
 			return false;
 		}
 			
@@ -82,8 +86,9 @@ public class Utilidades {
 			}
 			return modelo;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error en la creacion del modelo de tabla \n" 
+		                                         + e.getMessage(), "Error", 1);
+			//e.printStackTrace();
 			return null;
 		}
 	}

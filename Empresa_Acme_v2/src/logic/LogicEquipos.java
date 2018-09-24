@@ -52,7 +52,6 @@ public class LogicEquipos {
 	public static void borrarEquipos(String equipoSelecc) {
 		String sqlQuery;
 		boolean elimina = false;
-		DefaultTableModel modelo;
 		Connection conexion;
 
 		try {
@@ -103,8 +102,6 @@ public class LogicEquipos {
 
 	public static void borrarPersonalEquipos(String personalSelecc) {
 		String sqlQuery;
-		boolean elimina = false;
-		DefaultTableModel modelo;
 		Connection conexion;
 
 		

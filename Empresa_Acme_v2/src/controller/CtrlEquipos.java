@@ -60,8 +60,9 @@ public class CtrlEquipos {
 		});
 	}
 	public static void borrarEquipo() {
-		int fil, col;
-		DefaultTableModel modelo;
+		int fil;
+		int col;
+		
 		fil = view.FrmEquipos.tabEquipos.getSelectedRow();
 		col = 0;
 		equipoSelecc = String.valueOf(view.FrmEquipos.tabEquipos.getValueAt(fil, col));
@@ -82,7 +83,6 @@ public class CtrlEquipos {
 	}
 	public static void borrarPersonalEquipo() {
 		int fil, col;
-		DefaultTableModel modelo;
 		fil = view.FrmEquipos.tabPersonal.getSelectedRow();
 		col = 0;
 		personalSelecc = String.valueOf(view.FrmEquipos.tabPersonal.getValueAt(fil, col));

@@ -5,9 +5,7 @@ import java.sql.SQLException;
 
 import javax.sql.rowset.CachedRowSet;
 
-import controller.CtrlEmpleados;
 import controller.CtrlEquipos;
-import controller.CtrlPersonal;
 import dataBase.DBsqlServer;
 
 public class LogicPersonal {

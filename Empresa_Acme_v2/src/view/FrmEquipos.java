@@ -4,23 +4,17 @@ import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
 
-import model.Empleado;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import controller.CtrlEmpleados;
 import controller.CtrlEquipos;
-import controller.CtrlPersonal;
 
 public class FrmEquipos extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	public static DefaultListModel<String> lista;
 	public static JTable tabEquipos;
 	public static JTable tabPersonal;
 
@@ -30,9 +24,6 @@ public class FrmEquipos extends JFrame {
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("EQUIPOS");
 		setBounds(100, 100, 450, 387);
-
-		lista = new DefaultListModel<String>();
-		getContentPane().setLayout(null);
 
 		JButton btnNuevo = new JButton("NUEVO");
 		btnNuevo.setBounds(318, 18, 89, 23);
@@ -59,6 +50,8 @@ public class FrmEquipos extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		tabEquipos = new JTable(){
+			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				return false; //Las celdas no son editables.
 			}

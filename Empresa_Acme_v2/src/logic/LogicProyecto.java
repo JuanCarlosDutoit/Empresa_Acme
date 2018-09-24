@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import javax.sql.rowset.CachedRowSet;
 
-import controller.CtrlEmpleados;
 import controller.CtrlProyectos;
 import dataBase.DBsqlServer;
 
@@ -53,8 +52,6 @@ public class LogicProyecto {
 	public static void editarEmpleado(String nombre, String presupuesto, String inicio, String fin) {
 		String sqlQuery;
 		Connection conexion;
-		CachedRowSet rowset;
-		String n_cargo;
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		

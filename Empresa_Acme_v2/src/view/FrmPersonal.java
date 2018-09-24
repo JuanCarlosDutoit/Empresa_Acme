@@ -3,22 +3,18 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 
-import controller.CtrlEmpleado;
 import controller.CtrlPersonal;
 
 public class FrmPersonal extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	public static JComboBox cmbCargos;
-	public static JComboBox cmbEmpleados;
+	public static JComboBox<String> cmbCargos;
+	public static JComboBox<String> cmbEmpleados;
 	public static JButton btnGuardar;
 	
 	public FrmPersonal() {
@@ -35,11 +31,11 @@ public class FrmPersonal extends JDialog {
 		lblCargo.setBounds(10, 45, 64, 14);
 		getContentPane().add(lblCargo);
 		
-		cmbCargos = new JComboBox();
+		cmbCargos = new JComboBox<String>();
 		cmbCargos.setBounds(84, 45, 139, 20);
 		getContentPane().add(cmbCargos);
 		
-		cmbEmpleados = new JComboBox();
+		cmbEmpleados = new JComboBox<String>();
 		cmbEmpleados.setBounds(84, 8, 139, 20);
 		getContentPane().add(cmbEmpleados);
 		

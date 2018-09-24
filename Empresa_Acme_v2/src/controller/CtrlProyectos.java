@@ -34,8 +34,8 @@ public class CtrlProyectos {
 	}
 
 	public static void borrarProyecto() {
-		int fil, col;
-		DefaultTableModel modelo;
+		int fil;
+		int col;
 		fil = view.FrmProyectos.tabProyectos.getSelectedRow();
 		col = 0;
 		proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fil, col));

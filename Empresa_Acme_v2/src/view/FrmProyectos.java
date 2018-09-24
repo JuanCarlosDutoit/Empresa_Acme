@@ -7,13 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
 
-import model.Proyecto;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import controller.CtrlEmpleados;
 import controller.CtrlProyectos;
 
 public class FrmProyectos extends JFrame {

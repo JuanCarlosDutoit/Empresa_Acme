@@ -12,13 +12,15 @@ import javax.sql.rowset.RowSetProvider;
 import javax.swing.JOptionPane;
 
 import util.Utilidades;
-import view.FrmPrincipal;
 
 public class DBsqlServer {
-	
-	
+		
 	public static String cadenaConexion;
-	public static String ip,port,bd,usu,pass;
+	public static String ip;
+	public static String port;
+	public static String bd;
+	public static String usu;
+	public static String pass;
 	
 	public static boolean testConexion() {
 		Connection test;
@@ -56,13 +58,14 @@ public class DBsqlServer {
 	}
 	public static Connection establecerConexion(){
 		Connection conexionAux;
+		
 		System.out.println("Conectando a BD");
 		//System.out.println("Conectando a "+ cadenaConexion);
 		try {
 			conexionAux =  DriverManager.getConnection(cadenaConexion);
 			return conexionAux;
 		} catch (SQLException e) {
-			System.out.println(" Error Conectando a BD");
+			System.out.println("Error Conectando a BD");
 			return null;
 		}
 	}
@@ -72,6 +75,7 @@ public class DBsqlServer {
 			System.out.println("Desonectando de BD");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Error Conectando a BD ");
 			e.printStackTrace();
 		}
 	}
@@ -80,6 +84,7 @@ public class DBsqlServer {
 		
 		crearCadenaConexion();
 		conexion = establecerConexion();
+		
 		return conexion;
 	}
 	public static CachedRowSet ejecutarQuery(String sqlQuery,Connection conexion) {

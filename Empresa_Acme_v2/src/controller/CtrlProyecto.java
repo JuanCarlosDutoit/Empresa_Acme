@@ -1,8 +1,5 @@
 package controller;
 
-import javax.swing.table.DefaultTableModel;
-
-import view.FrmEmpleado;
 import view.FrmProyecto;
 
 public class CtrlProyecto {
@@ -49,7 +46,7 @@ public class CtrlProyecto {
 	
 	private static void rellenarDatosProyecto() {
 		int fila;
-		DefaultTableModel modelo;
+
 		System.out.println("Relleno datos del proyecto");
 		fila = view.FrmProyectos.tabProyectos.getSelectedRow();
 		

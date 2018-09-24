@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import controller.CtrlEmpleados;
 import dataBase.DBsqlServer;
 import util.Utilidades;
-import view.FrmEmpleados;
 
 public class LogicEmpleados {
 
@@ -40,7 +39,6 @@ public class LogicEmpleados {
 	//public static void borrarEmpleado(String empleadoSelecc) {
 	public static void borrarEmpleado() {
 		String sqlQuery;
-		DefaultTableModel modelo;
 		Connection conexion;
 		boolean elimina;
 		

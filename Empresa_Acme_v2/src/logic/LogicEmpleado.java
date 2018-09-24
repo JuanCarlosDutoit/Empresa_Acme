@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.sql.rowset.CachedRowSet;
-import javax.swing.table.DefaultTableModel;
 
 import controller.CtrlEmpleados;
 import dataBase.DBsqlServer;
@@ -29,7 +28,6 @@ public class LogicEmpleado {
 		String sqlQuery;
 		Connection conexion;
 		CachedRowSet rowset;
-		String n_cargo;
 		int n_codigo;
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
@@ -77,7 +75,6 @@ public class LogicEmpleado {
 		String sqlQuery;
 		Connection conexion;
 		CachedRowSet rowset;
-		String n_cargo;
 		int n_codigo;
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos

@@ -20,7 +20,7 @@ public class FrmEmpleado extends JDialog {
 	public static JTextField txtNombre;
 	public static JTextField txtApellidos;
 	public static JTextField txtDni;
-	public static JComboBox cbCargos;
+	public static JComboBox<String> cbCargos;
 	public static JRadioButton rdbtnHombre;
 	public static JRadioButton rdbtnMujer;
 	public static JButton btnGuardar;
@@ -96,7 +96,7 @@ public class FrmEmpleado extends JDialog {
 		btnEditar.setBounds(72, 145, 102, 23);
 		getContentPane().add(btnEditar);
 		
-		cbCargos = new JComboBox();
+		cbCargos = new JComboBox<String>();
 		cbCargos.setBounds(87, 108, 139, 20);
 		getContentPane().add(cbCargos);
 		

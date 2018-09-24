@@ -1,7 +1,6 @@
-/controller/
 /dataBase/
-/logic/
-/model/
-/start/
 /util/
+/controller/
+/logic/
+/start/
 /view/

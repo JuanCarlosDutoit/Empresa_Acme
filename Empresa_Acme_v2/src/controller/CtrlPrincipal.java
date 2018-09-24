@@ -14,6 +14,4 @@ public class CtrlPrincipal {
 	public static void gestionEquipos() {
 		controller.CtrlEquipos.inicio();
 	}
-
-
 }
