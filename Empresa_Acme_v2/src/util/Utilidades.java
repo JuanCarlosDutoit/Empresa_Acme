@@ -88,9 +88,7 @@ public class Utilidades {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error en la creacion del modelo de tabla \n" 
 		                                         + e.getMessage(), "Error", 1);
-			//e.printStackTrace();
 			return null;
 		}
 	}
-	
 }
