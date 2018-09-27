@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.sql.rowset.CachedRowSet;
 
 import model.Empleado;
+import util.Utilidades;
 import view.FrmEmpleado;
 
 public class CtrlEmpleado {
@@ -70,8 +71,7 @@ public class CtrlEmpleado {
 				FrmEmpleado.cbCargos.addItem(cargo);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-			
+			Utilidades.gestionaErrorSql(e);	
 		}
 		System.out.println("fin Rellenando combo");
 	}
@@ -88,25 +88,29 @@ public class CtrlEmpleado {
 		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString().substring(0, FrmEmpleado.cbCargos.getSelectedItem().toString().indexOf("-"));
 		emp.setPuesto(Integer.valueOf(cargo));
 		
-		/*nombre = FrmEmpleado.txtNombre.getText();
-		apellidos = FrmEmpleado.txtApellidos.getText();
-		dni = FrmEmpleado.txtDni.getText();
-		genero = FrmEmpleado.rdbtnHombre.isSelected() ? "1" : "2";
-		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString().substring(0, FrmEmpleado.cbCargos.getSelectedItem().toString().indexOf("-"));
-		*/
-		//logic.LogicEmpleado.addEmpleado(nombre,apellidos,dni,genero,cargo);
-		logic.LogicEmpleado.addEmpleado(emp);
-		
+		try {
+			logic.LogicEmpleado.addEmpleado(emp);
+		} catch (SQLException e) {
+			Utilidades.gestionaErrorSql(e);
+		}
 	}
 	public static void editarEmpleado() {
-		String nombre,apellidos,dni,genero,cargo;
+		String cargo;
 		
-		nombre = FrmEmpleado.txtNombre.getText();
-		apellidos = FrmEmpleado.txtApellidos.getText();
-		dni = FrmEmpleado.txtDni.getText();
-		genero = FrmEmpleado.rdbtnHombre.isSelected() ? "1" : "2";
+		Empleado emp;
+		emp = new Empleado();
+		
+		emp.setNombre(FrmEmpleado.txtNombre.getText());
+		emp.setApellido(FrmEmpleado.txtApellidos.getText());
+		emp.setDni(FrmEmpleado.txtDni.getText());
+		emp.setGenero(FrmEmpleado.rdbtnHombre.isSelected() ? 1 : 2);
 		cargo = FrmEmpleado.cbCargos.getSelectedItem().toString().substring(0, FrmEmpleado.cbCargos.getSelectedItem().toString().indexOf("-"));
+		emp.setPuesto(Integer.valueOf(cargo));
 		
-		logic.LogicEmpleado.editarEmpleado(nombre,apellidos,dni,genero,cargo);
+		try {
+			logic.LogicEmpleado.editarEmpleado(emp);
+		} catch (SQLException e) {
+			Utilidades.gestionaErrorSql(e);
+		}
 	}
 }

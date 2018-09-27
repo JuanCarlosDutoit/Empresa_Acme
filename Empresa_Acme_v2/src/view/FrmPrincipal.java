@@ -13,8 +13,8 @@ import javax.swing.JMenuItem;
 import controller.CtrlPrincipal;
 
 import javax.swing.JLabel;
-import javax.help.HelpBroker;
-import javax.help.HelpSet;
+//import javax.help.HelpBroker;
+//import javax.help.HelpSet;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
@@ -105,11 +105,11 @@ public class FrmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		cargarAyuda();
+		//cargarAyuda();
 		setVisible(true);
 	}
 	
-	private void cargarAyuda() {
+	/*private void cargarAyuda() {
 		System.out.println("cargo ayuda");
 		try {
 			// Carga el fichero de ayuda
@@ -127,5 +127,5 @@ public class FrmPrincipal extends JFrame {
 		} catch (Exception e) {
 			System.out.println("Error al cargar la ayuda: " + e);
 		}
-	}
+	}*/
 }

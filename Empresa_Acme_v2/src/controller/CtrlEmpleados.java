@@ -28,15 +28,6 @@ public class CtrlEmpleados {
 			//1 linea como seleccionada
 			view.FrmEmpleados.tabEmpleados.getSelectionModel().setSelectionInterval(0,0);
 		} catch (SQLException e) {
-			/*if(e.getErrorCode()==207) {
-				e.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Error en la ejecucion de Sql\n" 
-				                                    + e.getMessage(), "Error", 1);
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "vavavaa." 
-                        + e.getMessage(), "Error", 1);
-			}*/
 			Utilidades.gestionaErrorSql(e);
 		}
 	}
@@ -67,19 +58,15 @@ public class CtrlEmpleados {
 		});
 	}
 	public static void borrarEmpleado() {
-		/*int fil, col;
-		DefaultTableModel modelo;
-		fil = view.FrmEmpleados.tabEmpleados.getSelectedRow();
-		col = 0;
-		empleadoSelecc = String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fil, col));
-		*/
-		//logic.LogicEmpleados.borrarEmpleado(empleadoSelecc);
-		System.out.println("quiero borrar el :" + empleadoSelecc);
 		if (!CtrlEmpleados.empleadoSelecc.equals("-1")) {
 			if(JOptionPane.showConfirmDialog(null, "Va a eliminar este registro, desea continuar?",
 					"AVISO",JOptionPane.YES_NO_OPTION)==0) {
-				logic.LogicEmpleados.borrarEmpleado();
-				cargarListaEmpleados();
+				try {
+					logic.LogicEmpleados.borrarEmpleado();
+					cargarListaEmpleados();
+				} catch (SQLException e) {
+					Utilidades.gestionaErrorSql(e);
+				}
 			}
 		}else {
 			JOptionPane.showMessageDialog(null, "No ha seleccionado ningun empleado", "Error", 1);

@@ -1,10 +1,5 @@
 package start;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
-
 import dataBase.DBsqlServer;
 import util.Utilidades;
 
@@ -17,7 +12,7 @@ public class LunchtApp {
 	}
 
 	private void start() {
-		try {
+		//try {
 			boolean puede = false;
 			if (Utilidades.leerFicheroConexion("conexion.txt")) {
 				DBsqlServer.asignarDatosConexion();
@@ -56,7 +51,7 @@ public class LunchtApp {
 			}
 */
 			
-		} catch (SQLException e) {
+		/*} catch (SQLException e) {
 			Utilidades.gestionaErrorSql(e);
 			//e.printStackTrace();
 			//System.out.println(e.getErrorCode());
@@ -66,7 +61,7 @@ public class LunchtApp {
 		} catch (Exception e) {
 			// Utilidades.gestionaErrores();
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 }

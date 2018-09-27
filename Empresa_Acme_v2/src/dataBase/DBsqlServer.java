@@ -30,20 +30,29 @@ public class DBsqlServer {
 	public static String usu;
 	public static String pass;
 	
-	public static boolean testConexion() throws SQLException {
+	public static boolean testConexion() {
 		Connection test;
+		boolean testOk;
 		
 		System.out.println("Testing");
-		asignarDatosConexion();
-		crearCadenaConexion();
-		test = establecerConexion();
-		if(test != null) {
-			cerrarConexion(test);
-			System.out.println("Test OK");
-			return true;
-		}else {
-			System.out.println("Error al conectar");
-			return false;
+		testOk = false;
+		try {
+			asignarDatosConexion();
+			crearCadenaConexion();
+			test = establecerConexion();
+			if(test != null) {
+				cerrarConexion(test);
+				System.out.println("Test OK");
+				testOk = true;
+			}else {
+				System.out.println("Error al conectar");
+				testOk =  false;
+			}
+			return testOk;
+		}catch (SQLException e){
+			testOk =  false;
+			Utilidades.gestionaErrorSql(e);
+			return testOk;
 		}
 	}
 	
@@ -82,7 +91,7 @@ public class DBsqlServer {
 	public static Connection establecerConexion() throws SQLException{
 		Connection conexionAux;
 		System.out.println("Conectando a BD");
-		System.out.println("Conectando a "+ cadenaConexion);
+		//System.out.println("Conectando a "+ cadenaConexion);
 		conexionAux =  DriverManager.getConnection(cadenaConexion);
 		return conexionAux;
 	}
@@ -92,7 +101,6 @@ public class DBsqlServer {
 			conn.close();
 			System.out.println("Desonectando de BD");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Error Conectando a BD ");
 			e.printStackTrace();
 		}
@@ -113,21 +121,13 @@ public class DBsqlServer {
 	}
 	
 	public static CachedRowSet ejecutarQuery(String sqlQuery,Connection conexion) throws SQLException  {
-		//try {
-			System.out.println("Ejecutando consulta " + sqlQuery);
-			Statement s = conexion.createStatement();
-			ResultSet r = s.executeQuery(sqlQuery);
-			RowSetFactory factory = RowSetProvider.newFactory();
-			CachedRowSet rowset = factory.createCachedRowSet();
-			rowset.populate(r);
-			return rowset;
-			
-		/*} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error en la ejecucion de Sql." + e.getMessage(), "Error", 1);
-			System.out.println("Error en la ejecucion de Sql.");
-			System.out.println(e.getErrorCode());
-			return null;
-		}*/	
+		System.out.println("Ejecutando consulta " + sqlQuery);
+		Statement s = conexion.createStatement();
+		ResultSet r = s.executeQuery(sqlQuery);
+		RowSetFactory factory = RowSetProvider.newFactory();
+		CachedRowSet rowset = factory.createCachedRowSet();
+		rowset.populate(r);
+		return rowset;
 	}
 	public static void ejecutarQueryUpdate(String sqlQuery, Connection conexion) {
 		int r;
