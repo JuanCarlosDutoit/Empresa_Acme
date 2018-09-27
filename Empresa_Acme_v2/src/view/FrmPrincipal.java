@@ -2,6 +2,8 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -11,12 +13,16 @@ import javax.swing.JMenuItem;
 import controller.CtrlPrincipal;
 
 import javax.swing.JLabel;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
 public class FrmPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
+	private static JMenuItem mntmAyuda;
 	
 	public FrmPrincipal() {
 		
@@ -51,8 +57,12 @@ public class FrmPrincipal extends JFrame {
 		mnBase.add(mntmEquipos);
 		JMenuItem menuItem = new JMenuItem("_______________");
 		mnBase.add(menuItem);
+		
+		mntmAyuda = new JMenuItem("Ayuda");
+		mnBase.add(mntmAyuda);
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mnBase.add(mntmSalir);
+		
 		JMenu mnGestion = new JMenu("GESTION");
 		menuBar.add(mnGestion);
 		JMenuItem mntmEquiposGestion = new JMenuItem("Equipos");
@@ -90,7 +100,32 @@ public class FrmPrincipal extends JFrame {
 				System.exit(0);
 			}
 		});
-		
+		mntmAyuda.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		cargarAyuda();
 		setVisible(true);
+	}
+	
+	private void cargarAyuda() {
+		System.out.println("cargo ayuda");
+		try {
+			// Carga el fichero de ayuda
+			File fichero = new File("src/proyecto/help/help.hs");
+			URL hsURL = fichero.toURI().toURL();
+		 
+			// Crea el HelpSet y el HelpBroker
+			HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+			HelpBroker hb = helpset.createHelpBroker();
+		 
+			// Pone ayuda a item de menu al pulsar F1. mntmIndice es el JMenuitem
+			hb.enableHelpOnButton(mntmAyuda, "manual", helpset);
+			//hb.enableHelpKey(getContentPane(), "manual", helpset);
+		 
+		} catch (Exception e) {
+			System.out.println("Error al cargar la ayuda: " + e);
+		}
 	}
 }

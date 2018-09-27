@@ -13,8 +13,16 @@ import javax.swing.JOptionPane;
 
 import util.Utilidades;
 
+/**
+ * 
+ * @author Juan Carlos Dutoit
+ * @since 24/09/2018
+ * Esta clase engloba todos los métodos que actuan sobre la base de datos
+ *
+ */
 public class DBsqlServer {
 		
+	public static Connection conexion;
 	public static String cadenaConexion;
 	public static String ip;
 	public static String port;
@@ -22,7 +30,7 @@ public class DBsqlServer {
 	public static String usu;
 	public static String pass;
 	
-	public static boolean testConexion() {
+	public static boolean testConexion() throws SQLException {
 		Connection test;
 		
 		System.out.println("Testing");
@@ -38,13 +46,28 @@ public class DBsqlServer {
 			return false;
 		}
 	}
+	
+	/**
+	 * @author Juan Carlos Dutoit
+	 * @since 24/09/2018
+	 * Metodo que recoge los parametros de conexión de la base
+	 * de datos previamente leidos de los ficheros de conexión
+	 * y los asigna a las variables globales de la clase.
+	 */
 	public static void asignarDatosConexion() {
-		ip= Utilidades.ip;
-		port= Utilidades.port;
-		bd=Utilidades.bd;
-		usu=Utilidades.usu;
-		pass=Utilidades.pass;
+		ip = Utilidades.ip;
+		port = Utilidades.port;
+		bd = Utilidades.bd;
+		usu = Utilidades.usu;
+		pass = Utilidades.pass;
 	}
+	
+	/**
+	 * @author Juan Carlos Dutoit
+	 * @since 24/09/2018
+	 * Metodo que crea la cadena de conexion a la base de datos SQlServer con los 
+	 * parametros leidos de los ficheros de conexión.
+	 */
 	public static void crearCadenaConexion() {
 		
 		String cadena  = "jdbc:sqlserver:";
@@ -56,19 +79,14 @@ public class DBsqlServer {
 
 		cadenaConexion = cadena;
 	}
-	public static Connection establecerConexion(){
+	public static Connection establecerConexion() throws SQLException{
 		Connection conexionAux;
-		
 		System.out.println("Conectando a BD");
-		//System.out.println("Conectando a "+ cadenaConexion);
-		try {
-			conexionAux =  DriverManager.getConnection(cadenaConexion);
-			return conexionAux;
-		} catch (SQLException e) {
-			System.out.println("Error Conectando a BD");
-			return null;
-		}
+		System.out.println("Conectando a "+ cadenaConexion);
+		conexionAux =  DriverManager.getConnection(cadenaConexion);
+		return conexionAux;
 	}
+	
 	public static void cerrarConexion(Connection conn){
 		try {
 			conn.close();
@@ -79,16 +97,23 @@ public class DBsqlServer {
 			e.printStackTrace();
 		}
 	}
-	public static Connection conectarBD() {
+
+	/**
+	 * @author Juan Carlos Dutoit Carmona
+	 * @since 24/09/2018
+	 * @deprecated Vamos a usar los metodos simples
+	 * @return 
+	 * @throws SQLException
+	 */
+	public static Connection conectarBD() throws SQLException {
 		Connection conexion;
-		
 		crearCadenaConexion();
 		conexion = establecerConexion();
-		
 		return conexion;
 	}
-	public static CachedRowSet ejecutarQuery(String sqlQuery,Connection conexion) {
-		try {
+	
+	public static CachedRowSet ejecutarQuery(String sqlQuery,Connection conexion) throws SQLException  {
+		//try {
 			System.out.println("Ejecutando consulta " + sqlQuery);
 			Statement s = conexion.createStatement();
 			ResultSet r = s.executeQuery(sqlQuery);
@@ -97,11 +122,12 @@ public class DBsqlServer {
 			rowset.populate(r);
 			return rowset;
 			
-		} catch (SQLException e) {
+		/*} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error en la ejecucion de Sql." + e.getMessage(), "Error", 1);
 			System.out.println("Error en la ejecucion de Sql.");
+			System.out.println(e.getErrorCode());
 			return null;
-		}	
+		}*/	
 	}
 	public static void ejecutarQueryUpdate(String sqlQuery, Connection conexion) {
 		int r;

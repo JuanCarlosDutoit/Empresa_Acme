@@ -17,7 +17,7 @@ public class Utilidades {
 	public static String usu;
 	public static String pass;
 	
-	public static boolean leerFicheroConexion(String nfichero) {
+	public static boolean leerFicheroConexion(String nfichero){
 		//Leo fichero de conexion y recupero los datos
 		int lineasFicheroConexion = 5;
 		String linea = "";
@@ -50,7 +50,7 @@ public class Utilidades {
 					}
 				}else {
 					buffer.close();
-					JOptionPane.showMessageDialog(null, "Faltan datos en el fichero de conexion", "Error", 1);
+					JOptionPane.showMessageDialog(null, "Faltan datos en el fichero de conexion " + nfichero, "Error", 1);
 					return false;
 				}
 			}
@@ -58,19 +58,20 @@ public class Utilidades {
 			return true;
 			
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error de lectura en el fichero de conexion \n" 
+			JOptionPane.showMessageDialog(null, "Error de lectura en el fichero de conexion " 
+		                                        + nfichero + "\n" 
 		                                        + e.getMessage(), "Error", 1);
 			return false;
 		}
 			
 	}
-	public static DefaultTableModel creaModeloTablas(CachedRowSet r) {
+	public static DefaultTableModel creaModeloTablas(CachedRowSet r) throws SQLException {
 		
 		DefaultTableModel modelo = new DefaultTableModel();
 		ResultSetMetaData md;
 		int totalcampos;
 		
-		try {
+		//try {
 			md = r.getMetaData();
 		    totalcampos = md.getColumnCount();
 			
@@ -85,10 +86,29 @@ public class Utilidades {
 				modelo.addRow(campo);
 			}
 			return modelo;
-		} catch (SQLException e) {
+		/*} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error en la creacion del modelo de tabla \n" 
 		                                         + e.getMessage(), "Error", 1);
 			return null;
+		}*/
+	}
+	public static void gestionaErrorSql(SQLException e) {
+		String error = "";
+		switch(e.getErrorCode()) {
+		case 0:
+			error = "Error en la conexion a la BD\n"
+		          + "No se pudo realizar la conexión TCP/IP al host";
+			break;
+		case 207://Invalid colum name 			
+			error= "Error en la ejecucion de Sql\n" + e.getMessage() ;
+			break;
+		case 208://Invalid object name (tablas)
+			error= "Error en la ejecucion de Sql\n" + e.getMessage() ;
+			break;
+		default:
+			error= "Error indefinido\n" + e.getErrorCode()+"\n"+ e.getMessage() ;
+			break;
 		}
+		JOptionPane.showMessageDialog(null,error,"Error", 1);
 	}
 }

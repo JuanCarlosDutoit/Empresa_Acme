@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.table.DefaultTableModel;
 
 public class CtrlProyectos {
@@ -12,8 +14,13 @@ public class CtrlProyectos {
 
 	public static void cargarListaProyectos() {
 		DefaultTableModel modelo;
-		modelo = logic.LogicProyectos.iniciaListaProyectos();
-		rellenarListaProyectos(modelo);
+		try {
+			modelo = logic.LogicProyectos.iniciaListaProyectos();
+			rellenarListaProyectos(modelo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private static void rellenarListaProyectos(DefaultTableModel modelo) {
@@ -39,7 +46,12 @@ public class CtrlProyectos {
 		fil = view.FrmProyectos.tabProyectos.getSelectedRow();
 		col = 0;
 		proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fil, col));
-		logic.LogicProyectos.borrarProyecto(proyectoSelecc);
-		cargarListaProyectos();
+		try {
+			logic.LogicProyectos.borrarProyecto(proyectoSelecc);
+			cargarListaProyectos();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

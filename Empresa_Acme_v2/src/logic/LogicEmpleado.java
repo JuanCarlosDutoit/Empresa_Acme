@@ -11,7 +11,7 @@ import model.Empleado;
 
 public class LogicEmpleado {
 
-	public static CachedRowSet rellenaComboCargo() {
+	public static CachedRowSet rellenaComboCargo() throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 		
@@ -32,9 +32,12 @@ public class LogicEmpleado {
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
 
 		try {	
+			
+			DBsqlServer.crearCadenaConexion();
+			conexion = DBsqlServer.establecerConexion();
 			
 			sqlQuery = "SELECT MAX(CODIGO_EMPLEADO) "
 					+  " FROM JCD_EMPLEADOS";
@@ -79,10 +82,12 @@ public class LogicEmpleado {
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
 
 		try {	
 			
+			DBsqlServer.crearCadenaConexion();
+			conexion = DBsqlServer.establecerConexion();
 			//--> PASAR EL CODIGO DE EMPLEADO A IDENTITY PARA EVITAR ESTO
 			sqlQuery = "SELECT MAX(CODIGO_EMPLEADO) "
 					+  " FROM JCD_EMPLEADOS";
@@ -129,10 +134,12 @@ public class LogicEmpleado {
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
 
 		try {	
 			
+			DBsqlServer.crearCadenaConexion();
+			conexion = DBsqlServer.establecerConexion();
 			sqlQuery = "SELECT CODIGO_CARGO"
 					+  " FROM JCD_CARGOS"
 					+  " WHERE NOMBRE = '" + cargo + "'";

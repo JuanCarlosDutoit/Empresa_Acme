@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import view.FrmEquipo;
 
 public class CtrlEquipo {
@@ -74,7 +76,12 @@ public class CtrlEquipo {
 		nombre = FrmEquipo.txtNombre.getText();
 		descripcion = FrmEquipo.txtDes.getText();
 		
-		logic.LogicEquipo.editarEquipo(nombre,descripcion);
+		try {
+			logic.LogicEquipo.editarEquipo(nombre,descripcion);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}		
 	

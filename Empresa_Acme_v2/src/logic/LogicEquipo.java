@@ -18,9 +18,12 @@ public class LogicEquipo {
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
 
 		try {	
+			
+			DBsqlServer.crearCadenaConexion();
+			conexion = DBsqlServer.establecerConexion();
 			
 			sqlQuery = "SELECT MAX(CODIGO_EQUIPO) "
 					+  " FROM JCD_EQUIPOS";
@@ -46,13 +49,16 @@ public class LogicEquipo {
 		
 	}
 
-	public static void editarEquipo(String nombre, String descripcion) {
+	public static void editarEquipo(String nombre, String descripcion) throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
+		
+		DBsqlServer.crearCadenaConexion();
+		conexion = DBsqlServer.establecerConexion();
 	
 		sqlQuery = "UPDATE JCD_EQUIPOS SET "
 				+  "NOMBRE = '"+ nombre + "',"

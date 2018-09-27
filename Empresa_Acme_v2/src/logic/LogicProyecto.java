@@ -10,7 +10,7 @@ import dataBase.DBsqlServer;
 
 public class LogicProyecto {
 
-	public static void addEmpleado(String nombre, String presupuesto, String inicio, String fin) {
+	public static void addProyecto(String nombre, String presupuesto, String inicio, String fin) {
 		
 		String sqlQuery;
 		Connection conexion;
@@ -19,9 +19,12 @@ public class LogicProyecto {
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
 
 		try {	
+			
+			DBsqlServer.crearCadenaConexion();
+			conexion = DBsqlServer.establecerConexion();
 			
 			sqlQuery = "SELECT MAX(CODIGO_PROYECTO) "
 					+  " FROM JCD_PROYECTOS";
@@ -49,13 +52,16 @@ public class LogicProyecto {
 		}	
 	}
 
-	public static void editarEmpleado(String nombre, String presupuesto, String inicio, String fin) {
+	public static void editarProyecto(String nombre, String presupuesto, String inicio, String fin)throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
+		
+		DBsqlServer.crearCadenaConexion();
+		conexion = DBsqlServer.establecerConexion();
 
 		sqlQuery = "UPDATE JCD_PROYECTOS SET "
 				+  "NOMBRE = '"+ nombre + "',"

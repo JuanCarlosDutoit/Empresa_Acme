@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -17,17 +19,27 @@ public class CtrlEquipos {
 
 	public static void cargarListaEquipos() {
 		DefaultTableModel modelo;
-		modelo = logic.LogicEquipos.iniciaListaEquipos();
-		rellenarListaEquipos(modelo);
-		//Para que se inice en la 1 fila porque la 1 vez no carga el evento del ValueChanged del listener 
-		//de la tabla
-		view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,1);
-		view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,0);
+		try {
+			modelo = logic.LogicEquipos.iniciaListaEquipos();
+			rellenarListaEquipos(modelo);
+			//Para que se inice en la 1 fila porque la 1 vez no carga el evento del ValueChanged del listener 
+			//de la tabla
+			view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,1);
+			view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static void cargarListaPersonal() {
 		DefaultTableModel modelo;
-		modelo = logic.LogicEquipos.iniciaListaPersonal();
-		rellenarListaPersonal(modelo);
+		try {
+			modelo = logic.LogicEquipos.iniciaListaPersonal();
+			rellenarListaPersonal(modelo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	private static void rellenarListaPersonal(DefaultTableModel modelo) {
 		view.FrmEquipos.tabPersonal.setModel(modelo);
@@ -86,9 +98,13 @@ public class CtrlEquipos {
 		fil = view.FrmEquipos.tabPersonal.getSelectedRow();
 		col = 0;
 		personalSelecc = String.valueOf(view.FrmEquipos.tabPersonal.getValueAt(fil, col));
-		logic.LogicEquipos.borrarPersonalEquipos(personalSelecc);
-		cargarListaEquipos();
-		
+		try {
+			logic.LogicEquipos.borrarPersonalEquipos(personalSelecc);
+			cargarListaEquipos();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static void addPersonalEquipo() {
 		CtrlPersonal.inicio();

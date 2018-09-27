@@ -13,12 +13,16 @@ import util.Utilidades;
 
 public class LogicEquipos {
 
-	public static DefaultTableModel iniciaListaEquipos() {
+	public static DefaultTableModel iniciaListaEquipos() throws SQLException {
 		String sqlQuery;
 		DefaultTableModel modelo;
 		Connection conexion;
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
+		
+		DBsqlServer.crearCadenaConexion();
+		conexion = DBsqlServer.establecerConexion();
+		
 		sqlQuery = "SELECT CODIGO_EQUIPO,"
 				        + "NOMBRE,"
 				        + "DESCRIPCION"
@@ -29,12 +33,15 @@ public class LogicEquipos {
 		return modelo;
 	}
 
-	public static DefaultTableModel iniciaListaPersonal() {
+	public static DefaultTableModel iniciaListaPersonal()throws SQLException {
 		String sqlQuery;
 		DefaultTableModel modelo;
 		Connection conexion;
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
+		DBsqlServer.crearCadenaConexion();
+		conexion = DBsqlServer.establecerConexion();
+		
 		sqlQuery = "SELECT PEQ.CODIGO_PERSONAL,E.NOMBRE,E.APELLIDOS,C.NOMBRE PUESTO" 
 				+  " FROM JCD_EMPLEADOS E INNER JOIN JCD_PERSONAL_EQUIPOS PEQ"
 			    +  "  ON E.Codigo_Empleado = PEQ.Empleado"
@@ -55,7 +62,9 @@ public class LogicEquipos {
 		Connection conexion;
 
 		try {
-			conexion = DBsqlServer.conectarBD();
+			//conexion = DBsqlServer.conectarBD();
+			DBsqlServer.crearCadenaConexion();
+			conexion = DBsqlServer.establecerConexion();
 		
 			sqlQuery = "SELECT COUNT(EMPLEADO)"
 					+  " FROM JCD_PERSONAL_EQUIPOS"
@@ -71,7 +80,10 @@ public class LogicEquipos {
 				if(JOptionPane.showConfirmDialog(null, "Hay Personal asignado, desea continuar?","AVISO",JOptionPane.YES_NO_OPTION)==0) {
 					//Elimina el personal relacionado
 					System.out.println("Eliminamos el personal tb");
-					conexion = DBsqlServer.conectarBD();
+					//conexion = DBsqlServer.conectarBD();
+					DBsqlServer.crearCadenaConexion();
+					conexion = DBsqlServer.establecerConexion();
+					
 					sqlQuery = "DELETE" 
 							+  " FROM JCD_PERSONAL_EQUIPOS"
 							+  " WHERE EQUIPO = " + equipoSelecc; 
@@ -86,7 +98,10 @@ public class LogicEquipos {
 			}
 			if(elimina) {
 				System.out.println("Eliminamos equipo");
-				conexion = DBsqlServer.conectarBD();
+				//conexion = DBsqlServer.conectarBD();
+				DBsqlServer.crearCadenaConexion();
+				conexion = DBsqlServer.establecerConexion();
+				
 				sqlQuery = "DELETE" 
 						+  " FROM JCD_EQUIPOS"
 						+  " WHERE CODIGO_EQUIPO = " + equipoSelecc; 
@@ -100,13 +115,16 @@ public class LogicEquipos {
 		}
 	}
 
-	public static void borrarPersonalEquipos(String personalSelecc) {
+	public static void borrarPersonalEquipos(String personalSelecc)throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 
 		
 		System.out.println("Eliminamos personal");
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
+		DBsqlServer.crearCadenaConexion();
+		conexion = DBsqlServer.establecerConexion();
+		
 		sqlQuery = "DELETE" 
 				+  " FROM JCD_PERSONAL_EQUIPOS"
 				+  " WHERE CODIGO_PERSONAL = " + personalSelecc; 

@@ -1,12 +1,15 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-@SuppressWarnings("unused")
+import util.Utilidades;
+
 public class CtrlEmpleados {
 	
 	public static String empleadoSelecc; 
@@ -19,10 +22,23 @@ public class CtrlEmpleados {
 	}
 	public static void cargarListaEmpleados() {
 		DefaultTableModel modelo;
-		modelo = logic.LogicEmpleados.iniciaListaEmpleados();
-		rellenarListaEmpleados(modelo);
-		//1 linea como seleccionada, aqui para que salte evento
-		view.FrmEmpleados.tabEmpleados.getSelectionModel().setSelectionInterval(0,0);
+		try {
+			modelo = logic.LogicEmpleados.iniciaListaEmpleados();
+			rellenarListaEmpleados(modelo);
+			//1 linea como seleccionada
+			view.FrmEmpleados.tabEmpleados.getSelectionModel().setSelectionInterval(0,0);
+		} catch (SQLException e) {
+			/*if(e.getErrorCode()==207) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error en la ejecucion de Sql\n" 
+				                                    + e.getMessage(), "Error", 1);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "vavavaa." 
+                        + e.getMessage(), "Error", 1);
+			}*/
+			Utilidades.gestionaErrorSql(e);
+		}
 	}
 	public static void rellenarListaEmpleados(DefaultTableModel modelo) {
 		//Establezco el modelo de la tabla

@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import view.FrmProyecto;
 
 public class CtrlProyecto {
@@ -57,18 +59,18 @@ public class CtrlProyecto {
 		view.FrmProyecto.txtFechaFin.setText(String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 4)));
 	}
 	public static void addProyecto() {
-		int fila;
+		//int fila;
 		String nombre,presupuesto,inicio,fin;
 		
-		fila = view.FrmProyectos.tabProyectos.getSelectedRow();
-		CtrlProyectos.proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 0));
+		//fila = view.FrmProyectos.tabProyectos.getSelectedRow();
+		//CtrlProyectos.proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 0));
 		
 		nombre = FrmProyecto.txtNombre.getText();
 		presupuesto = FrmProyecto.txtPresupuesto.getText();
 		inicio = FrmProyecto.txtFechaInicio.getText();
 		fin =  FrmProyecto.txtFechaFin.getText();
 		
-		logic.LogicProyecto.addEmpleado(nombre,presupuesto,inicio,fin);
+		logic.LogicProyecto.addProyecto(nombre,presupuesto,inicio,fin);
 		
 	}
 	public static void editarProyecto() {
@@ -83,7 +85,12 @@ public class CtrlProyecto {
 		inicio = FrmProyecto.txtFechaInicio.getText();
 		fin =  FrmProyecto.txtFechaFin.getText();
 		
-		logic.LogicProyecto.editarEmpleado(nombre,presupuesto,inicio,fin);
+		try {
+			logic.LogicProyecto.editarProyecto(nombre, presupuesto, inicio, fin);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}		
 	

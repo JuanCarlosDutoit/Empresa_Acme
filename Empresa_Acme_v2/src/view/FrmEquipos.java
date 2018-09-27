@@ -24,6 +24,7 @@ public class FrmEquipos extends JFrame {
 		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setTitle("EQUIPOS");
 		setBounds(100, 100, 450, 387);
+		getContentPane().setLayout(null);
 
 		JButton btnNuevo = new JButton("NUEVO");
 		btnNuevo.setBounds(318, 18, 89, 23);
@@ -45,6 +46,10 @@ public class FrmEquipos extends JFrame {
 		btnAsignar.setBounds(377, 241, 41, 23);
 		getContentPane().add(btnAsignar);
 		
+		JButton btnQuitar = new JButton("-");
+		btnQuitar.setBounds(377, 275, 41, 23);
+		getContentPane().add(btnQuitar);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 14, 271, 161);
 		getContentPane().add(scrollPane);
@@ -55,20 +60,16 @@ public class FrmEquipos extends JFrame {
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				return false; //Las celdas no son editables.
 			}
-			};;
+			};
 		scrollPane.setViewportView(tabEquipos);
-		
-		
+				
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(22, 218, 345, 103);
+		scrollPane_1.setBounds(25, 199, 342, 138);
 		getContentPane().add(scrollPane_1);
 		
 		tabPersonal = new JTable();
 		scrollPane_1.setViewportView(tabPersonal);
 		
-		JButton btnQuitar = new JButton("-");
-		btnQuitar.setBounds(377, 275, 41, 23);
-		getContentPane().add(btnQuitar);
 
 		// Listeners
 		btnNuevo.addActionListener(new ActionListener() {
@@ -109,8 +110,6 @@ public class FrmEquipos extends JFrame {
 				CtrlEquipos.borrarPersonalEquipo();
 			}
 		});
-
-		
 		setVisible(true);
 	}
 }

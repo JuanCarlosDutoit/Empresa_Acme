@@ -71,6 +71,7 @@ public class CtrlEmpleado {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		}
 		System.out.println("fin Rellenando combo");
 	}

@@ -10,11 +10,14 @@ import dataBase.DBsqlServer;
 
 public class LogicPersonal {
 
-	public static CachedRowSet rellenaComboEmpleado() {
+	public static CachedRowSet rellenaComboEmpleado()throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
+		DBsqlServer.crearCadenaConexion();
+		conexion = DBsqlServer.establecerConexion();
+		
 		sqlQuery = "SELECT CODIGO_EMPLEADO,NOMBRE,APELLIDOS "
 				+  " FROM JCD_EMPLEADOS"
 				+  " WHERE CODIGO_EMPLEADO NOT IN("
@@ -27,11 +30,14 @@ public class LogicPersonal {
 		return rowset;
 	}
 
-	public static CachedRowSet rellenaComboCargo() {
+	public static CachedRowSet rellenaComboCargo()throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
+		DBsqlServer.crearCadenaConexion();
+		conexion = DBsqlServer.establecerConexion();
+		
 		sqlQuery = "SELECT CODIGO_CARGO,NOMBRE "
 				+  " FROM JCD_CARGOS";
 		CachedRowSet rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
@@ -50,7 +56,10 @@ public class LogicPersonal {
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
 		try {	
-			conexion = DBsqlServer.conectarBD();
+			//conexion = DBsqlServer.conectarBD();
+			DBsqlServer.crearCadenaConexion();
+			conexion = DBsqlServer.establecerConexion();
+			
 			sqlQuery = "SELECT MAX(CODIGO_PERSONAL) "
 					+  " FROM JCD_PERSONAL_EQUIPOS";
 			

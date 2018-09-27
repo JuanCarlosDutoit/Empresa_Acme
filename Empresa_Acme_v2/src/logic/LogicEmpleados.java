@@ -13,12 +13,15 @@ import util.Utilidades;
 
 public class LogicEmpleados {
 
-	public static DefaultTableModel iniciaListaEmpleados() {
+	public static DefaultTableModel iniciaListaEmpleados()throws SQLException {
 		String sqlQuery;
 		DefaultTableModel modelo;
 		Connection conexion;
 		
-		conexion = DBsqlServer.conectarBD();
+		//conexion = DBsqlServer.conectarBD();
+		//DBsqlServer.crearCadenaConexion();
+		conexion = DBsqlServer.establecerConexion();
+		
 		sqlQuery = "SELECT CODIGO_EMPLEADO,"
 				        + "JCD_EMPLEADOS.NOMBRE AS NOMBRE,"
 				        + "APELLIDOS,"
@@ -46,6 +49,7 @@ public class LogicEmpleados {
 		try {
 			//--> Antes de eliminar hay que comprobar que no pertenezca a equipos
 			conexion = DBsqlServer.conectarBD();
+			
 			sqlQuery = "SELECT COUNT(*)" 
 					+  " FROM JCD_PERSONAL_EQUIPOS"
 					+  " WHERE EMPLEADO = " + CtrlEmpleados.empleadoSelecc;
@@ -53,11 +57,12 @@ public class LogicEmpleados {
 			DBsqlServer.cerrarConexion(conexion);
 		
 			rowset.next();
+			
 			if(!rowset.getString(1).equals("0")) {
 				if(JOptionPane.showConfirmDialog(null, "Este empleado pertenece a equipos,desea continuar?",
 						"AVISO",JOptionPane.YES_NO_OPTION)==0) {
 					//Elimino a este usuario de los equipos
-					conexion = DBsqlServer.conectarBD();
+					//conexion = DBsqlServer.conectarBD();
 					sqlQuery = "DELETE" 
 							+  " FROM JCD_PERSONAL_EQUIPOS"
 							+  " WHERE EMPLEADO = " + CtrlEmpleados.empleadoSelecc; 
@@ -69,7 +74,7 @@ public class LogicEmpleados {
 				elimina = true;
 			}
 			if(elimina) {
-				conexion = DBsqlServer.conectarBD();
+				//conexion = DBsqlServer.conectarBD();
 				sqlQuery = "DELETE" 
 						+  " FROM JCD_EMPLEADOS"
 						+  " WHERE CODIGO_EMPLEADO = " + CtrlEmpleados.empleadoSelecc; 
