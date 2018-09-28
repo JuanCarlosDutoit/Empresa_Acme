@@ -2,6 +2,8 @@ package controller;
 
 import java.sql.SQLException;
 
+import model.Proyecto;
+import util.Utilidades;
 import view.FrmProyecto;
 
 public class CtrlProyecto {
@@ -52,47 +54,43 @@ public class CtrlProyecto {
 		System.out.println("Relleno datos del proyecto");
 		fila = view.FrmProyectos.tabProyectos.getSelectedRow();
 		
-		System.out.println("asignando.." + String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 1)));
+		//System.out.println("asignando.." + String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 1)));
 		view.FrmProyecto.txtNombre.setText(String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 1)));
 		view.FrmProyecto.txtPresupuesto.setText(String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 2)));
 		view.FrmProyecto.txtFechaInicio.setText(String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 3)));
 		view.FrmProyecto.txtFechaFin.setText(String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 4)));
 	}
 	public static void addProyecto() {
-		//int fila;
-		String nombre,presupuesto,inicio,fin;
+		Proyecto project;
+		project = new Proyecto();
+
 		
-		//fila = view.FrmProyectos.tabProyectos.getSelectedRow();
-		//CtrlProyectos.proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 0));
+		project.setNombre(FrmProyecto.txtNombre.getText());
+		project.setPresupuesto(Double.valueOf(FrmProyecto.txtPresupuesto.getText()));
+		project.setFecInicio(FrmProyecto.txtFechaInicio.getText());
+		project.setFecFin(FrmProyecto.txtFechaFin.getText());
 		
-		nombre = FrmProyecto.txtNombre.getText();
-		presupuesto = FrmProyecto.txtPresupuesto.getText();
-		inicio = FrmProyecto.txtFechaInicio.getText();
-		fin =  FrmProyecto.txtFechaFin.getText();
-		
-		logic.LogicProyecto.addProyecto(nombre,presupuesto,inicio,fin);
+		try {
+			logic.LogicProyecto.addProyecto(project);
+		} catch (SQLException e) {
+			Utilidades.gestionaErrorSql(e);
+		}
 		
 	}
 	public static void editarProyecto() {
-		int fila;
-		String nombre,presupuesto,inicio,fin;
+		Proyecto project;
+		project = new Proyecto();
 		
-		fila = view.FrmProyectos.tabProyectos.getSelectedRow();
-		CtrlProyectos.proyectoSelecc = String.valueOf(view.FrmProyectos.tabProyectos.getValueAt(fila, 0));
-		
-		nombre = FrmProyecto.txtNombre.getText();
-		presupuesto = FrmProyecto.txtPresupuesto.getText();
-		inicio = FrmProyecto.txtFechaInicio.getText();
-		fin =  FrmProyecto.txtFechaFin.getText();
+		project.setNombre(FrmProyecto.txtNombre.getText());
+		project.setPresupuesto(Double.valueOf(FrmProyecto.txtPresupuesto.getText()));
+		project.setFecInicio(FrmProyecto.txtFechaInicio.getText());
+		project.setFecFin(FrmProyecto.txtFechaFin.getText());
 		
 		try {
-			logic.LogicProyecto.editarProyecto(nombre, presupuesto, inicio, fin);
+			logic.LogicProyecto.editarProyecto(project);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Utilidades.gestionaErrorSql(e);
 		}
-		
 	}		
 	
-
 }

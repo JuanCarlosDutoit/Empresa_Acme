@@ -17,9 +17,6 @@ public class LogicEquipo {
 		int n_codigo;
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
-		
-		//conexion = DBsqlServer.conectarBD();
-
 		try {	
 			
 			DBsqlServer.crearCadenaConexion();

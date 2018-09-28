@@ -56,78 +56,60 @@ public class LogicEquipos {
 		return modelo;
 	}
 
-	public static void borrarEquipos(String equipoSelecc) {
+	public static void borrarEquipos() throws SQLException {
 		String sqlQuery;
 		boolean elimina = false;
 		Connection conexion;
 
-		try {
-			//conexion = DBsqlServer.conectarBD();
-			DBsqlServer.crearCadenaConexion();
-			conexion = DBsqlServer.establecerConexion();
+		conexion = DBsqlServer.establecerConexion();
 		
-			sqlQuery = "SELECT COUNT(EMPLEADO)"
-					+  " FROM JCD_PERSONAL_EQUIPOS"
-					+  " WHERE EQUIPO = " + equipoSelecc; 
-			CachedRowSet rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
-			DBsqlServer.cerrarConexion(conexion);
-			rowset.next();
-			System.out.println(rowset.getString(1));
-			if(rowset.getString(1).equals("0")) {
-				elimina = true;
-				System.out.println("No hay curritos elimino");
-			}else {
-				if(JOptionPane.showConfirmDialog(null, "Hay Personal asignado, desea continuar?","AVISO",JOptionPane.YES_NO_OPTION)==0) {
-					//Elimina el personal relacionado
-					System.out.println("Eliminamos el personal tb");
-					//conexion = DBsqlServer.conectarBD();
-					DBsqlServer.crearCadenaConexion();
-					conexion = DBsqlServer.establecerConexion();
+		sqlQuery = "SELECT COUNT(EMPLEADO)"
+				+  " FROM JCD_PERSONAL_EQUIPOS"
+				+  " WHERE EQUIPO = " + CtrlEquipos.equipoSelecc; 
+		CachedRowSet rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
+		
+		rowset.next();
+	
+		if(rowset.getString(1).equals("0")) {
+			elimina = true;
+		}else {
+			if(JOptionPane.showConfirmDialog(null, "Hay Personal asignado, desea continuar?",
+					                               "AVISO",JOptionPane.YES_NO_OPTION)==0) {
 					
-					sqlQuery = "DELETE" 
-							+  " FROM JCD_PERSONAL_EQUIPOS"
-							+  " WHERE EQUIPO = " + equipoSelecc; 
-					
-					DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
-					DBsqlServer.cerrarConexion(conexion);
-					elimina = true;
-				}else{
-					elimina = false;
-					System.out.println("No hacemos nada");
-				};
-			}
-			if(elimina) {
-				System.out.println("Eliminamos equipo");
-				//conexion = DBsqlServer.conectarBD();
-				DBsqlServer.crearCadenaConexion();
-				conexion = DBsqlServer.establecerConexion();
-				
 				sqlQuery = "DELETE" 
-						+  " FROM JCD_EQUIPOS"
-						+  " WHERE CODIGO_EQUIPO = " + equipoSelecc; 
-				
+						+  " FROM JCD_PERSONAL_EQUIPOS"
+						+  " WHERE EQUIPO = " + CtrlEquipos.equipoSelecc; 
+					
 				DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+				elimina = true;
+			}else{
+				elimina = false;
 				DBsqlServer.cerrarConexion(conexion);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			};
+		}
+		if(elimina) {
+			System.out.println("Eliminamos equipo");
+
+			conexion = DBsqlServer.establecerConexion();
+				
+			sqlQuery = "DELETE" 
+					+  " FROM JCD_EQUIPOS"
+					+  " WHERE CODIGO_EQUIPO = " + CtrlEquipos.equipoSelecc; 
+				
+			DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+			DBsqlServer.cerrarConexion(conexion);
 		}
 	}
 
-	public static void borrarPersonalEquipos(String personalSelecc)throws SQLException {
+	public static void borrarPersonalEquipos()throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 
-		
-		System.out.println("Eliminamos personal");
-		//conexion = DBsqlServer.conectarBD();
-		DBsqlServer.crearCadenaConexion();
 		conexion = DBsqlServer.establecerConexion();
 		
 		sqlQuery = "DELETE" 
 				+  " FROM JCD_PERSONAL_EQUIPOS"
-				+  " WHERE CODIGO_PERSONAL = " + personalSelecc; 
+				+  " WHERE CODIGO_PERSONAL = " + CtrlEquipos.personalSelecc; 
 			
 		DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
 		DBsqlServer.cerrarConexion(conexion);	

@@ -12,6 +12,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import controller.CtrlEmpleado;
+import java.awt.Toolkit;
 
 public class FrmEmpleado extends JDialog {
 
@@ -28,6 +29,7 @@ public class FrmEmpleado extends JDialog {
 	public static JButton btnEditar;
 	
 	public FrmEmpleado() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Usuario\\Downloads\\Mushroom.ico"));
 		setAlwaysOnTop(true);
 		setBounds(100, 100, 268, 218);
 		getContentPane().setLayout(null);

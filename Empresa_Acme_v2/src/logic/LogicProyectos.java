@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.sql.rowset.CachedRowSet;
 import javax.swing.table.DefaultTableModel;
 
+import controller.CtrlProyectos;
 import dataBase.DBsqlServer;
 import util.Utilidades;
 
@@ -33,16 +34,16 @@ public class LogicProyectos {
 		return modelo;
 	}
 
-	public static void borrarProyecto(String proyectoSelecc)throws SQLException {
+	public static void borrarProyecto() throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 		
-		//conexion = DBsqlServer.conectarBD();
+		//--> Antes de eliminar hay que comprobar que no haya equipos asignados a ese proyecto
 		DBsqlServer.crearCadenaConexion();
 		conexion = DBsqlServer.establecerConexion();
 		sqlQuery = "DELETE" 
 				+  " FROM JCD_PROYECTOS"
-				+  " WHERE CODIGO_PROYECTO = " + proyectoSelecc; 
+				+  " WHERE CODIGO_PROYECTO = " + CtrlProyectos.proyectoSelecc; 
 		
 		DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
 		DBsqlServer.cerrarConexion(conexion);

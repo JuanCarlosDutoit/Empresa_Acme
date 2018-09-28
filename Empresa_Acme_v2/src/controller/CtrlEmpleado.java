@@ -47,8 +47,9 @@ public class CtrlEmpleado {
 	}
 	private static void rellenarDatosEmpleado() {
 		int fila;
+		String cargo;
 		
-		System.out.println("Relleno datos del usuario");
+		//System.out.println("Relleno datos del usuario");
 		fila = view.FrmEmpleados.tabEmpleados.getSelectedRow();
 		FrmEmpleado.txtNombre.setText(String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 1)));
 		FrmEmpleado.txtApellidos.setText(String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 2)));
@@ -58,7 +59,16 @@ public class CtrlEmpleado {
 		}else {
 			FrmEmpleado.rdbtnMujer.setSelected(true);
 		}
-		FrmEmpleado.cbCargos.setSelectedItem(String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 5)));
+		//FrmEmpleado.cbCargos.setSelectedItem(String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 5)));
+		//-->esto no funciona por poner en el compbo el codigo para aligerar 
+		//y lo he cambiado por lo siguiente pero esta un pco feo
+		cargo = String.valueOf(view.FrmEmpleados.tabEmpleados.getValueAt(fila, 5));
+		for(int i = 0; i < FrmEmpleado.cbCargos.getItemCount(); i++ ) {
+			FrmEmpleado.cbCargos.setSelectedIndex(i);
+			if (FrmEmpleado.cbCargos.getSelectedItem().toString().indexOf(cargo)!= -1) {
+				i =  FrmEmpleado.cbCargos.getItemCount() +1;
+			}
+		}
 	}
 	public static void rellenarComboCargo() {
 		CachedRowSet rowset;
@@ -77,8 +87,8 @@ public class CtrlEmpleado {
 	}
 	public static void addEmpleado() {
 		String cargo;
-		
 		Empleado emp;
+		
 		emp = new Empleado();
 		
 		emp.setNombre(FrmEmpleado.txtNombre.getText());
