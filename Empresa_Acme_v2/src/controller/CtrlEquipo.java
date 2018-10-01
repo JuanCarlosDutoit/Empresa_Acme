@@ -2,6 +2,8 @@ package controller;
 
 import java.sql.SQLException;
 
+import model.Equipo;
+import util.Utilidades;
 import view.FrmEquipo;
 
 public class CtrlEquipo {
@@ -54,33 +56,31 @@ public class CtrlEquipo {
 		view.FrmEquipo.txtDes.setText(String.valueOf(view.FrmEquipos.tabEquipos.getValueAt(fila, 2)));
 	}
 	public static void addEquipo() {
-		int fila;
-		String nombre,descripcion;
+		Equipo equipo;
 		
-		fila = view.FrmEquipos.tabEquipos.getSelectedRow();
-		CtrlEquipos.equipoSelecc = String.valueOf(view.FrmEquipos.tabEquipos.getValueAt(fila, 0));
+		equipo = new Equipo();
 		
-		nombre = FrmEquipo.txtNombre.getText();
-		descripcion = FrmEquipo.txtDes.getText();
-		
-		logic.LogicEquipo.addEmpleado(nombre,descripcion);
-		
-	}
-	public static void editarEquipo() {
-		int fila;
-		String nombre,descripcion;
-		
-		fila = view.FrmEquipos.tabEquipos.getSelectedRow();
-		CtrlEquipos.equipoSelecc = String.valueOf(view.FrmEquipos.tabEquipos.getValueAt(fila, 0));
-		
-		nombre = FrmEquipo.txtNombre.getText();
-		descripcion = FrmEquipo.txtDes.getText();
+		equipo.setNombre(FrmEquipo.txtNombre.getText());
+		equipo.setDescripcion(FrmEquipo.txtDes.getText());
 		
 		try {
-			logic.LogicEquipo.editarEquipo(nombre,descripcion);
+			logic.LogicEquipo.addEquipo(equipo);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Utilidades.gestionaErrorSql(e);
+		}
+	}
+	public static void editarEquipo() {
+		Equipo equipo;
+		
+		equipo = new Equipo();
+		
+		equipo.setNombre(FrmEquipo.txtNombre.getText());
+		equipo.setDescripcion(FrmEquipo.txtDes.getText());
+		
+		try {
+			logic.LogicEquipo.editarEquipo(equipo);
+		} catch (SQLException e) {
+			Utilidades.gestionaErrorSql(e);
 		}
 		
 	}		

@@ -26,7 +26,9 @@ public class CtrlEmpleados {
 			modelo = logic.LogicEmpleados.iniciaListaEmpleados();
 			rellenarListaEmpleados(modelo);
 			//1 linea como seleccionada
-			view.FrmEmpleados.tabEmpleados.getSelectionModel().setSelectionInterval(0,0);
+			if(modelo.getRowCount()!=0) {
+				view.FrmEmpleados.tabEmpleados.getSelectionModel().setSelectionInterval(0,0);
+			}
 		} catch (SQLException e) {
 			Utilidades.gestionaErrorSql(e);
 		}

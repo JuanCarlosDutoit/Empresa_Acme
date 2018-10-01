@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import javax.sql.rowset.CachedRowSet;
 
+import util.Utilidades;
 import view.FrmPersonal;
 
 public class CtrlPersonal {
@@ -16,7 +17,6 @@ public class CtrlPersonal {
 
 	private static void rellenarComboEmpleado() {
 		CachedRowSet rowset;
-		System.out.println("Rellenando combo");
 		try {
 			rowset = logic.LogicPersonal.rellenaComboEmpleado();
 			while(rowset.next()) {
@@ -24,35 +24,31 @@ public class CtrlPersonal {
 				FrmPersonal.cmbEmpleados.addItem(Empleado);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Utilidades.gestionaErrorSql(e);
 		}
-		System.out.println("fin Rellenando combo");
 	}
 
 	private static void rellenarcomboCargo() {
 		CachedRowSet rowset;
-		System.out.println("Rellenando combo");
 		try {
 			rowset = logic.LogicPersonal.rellenaComboCargo();
 			while(rowset.next()) {
-				FrmPersonal.cmbCargos.addItem(rowset.getString(2));
+				String Empleado = rowset.getString(1)+"-"+rowset.getString(2);
+				FrmPersonal.cmbCargos.addItem(Empleado);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Utilidades.gestionaErrorSql(e);
 		}
-		System.out.println("fin Rellenando combo");	
 	}
 	public static void addPersonal() {
 		String empleado,cargo;
-		System.out.println(String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()));
-		System.out.println(String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()).substring(0,String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()).indexOf("-")));
 		empleado = String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()).substring(0,String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()).indexOf("-"));
-		System.out.println(empleado);
-		cargo = String.valueOf(FrmPersonal.cmbCargos.getSelectedItem());
-	
-		
-		logic.LogicPersonal.addEmpleado(empleado,cargo);
-		
+		cargo =String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()).substring(0,String.valueOf(FrmPersonal.cmbCargos.getSelectedItem()).indexOf("-"));
+		try {
+			logic.LogicPersonal.addEmpleado(empleado,cargo);
+		} catch (SQLException e) {
+				Utilidades.gestionaErrorSql(e);
+		}
 	}
 
 }

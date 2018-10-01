@@ -16,6 +16,8 @@ public class CtrlEquipos {
 	public static String personalSelecc; 
 	
 	public static void inicio() {
+		equipoSelecc = "-1";
+		personalSelecc = "-1"; 
 		new view.FrmEquipos();
 		cargarListaEquipos();
 	}
@@ -27,7 +29,9 @@ public class CtrlEquipos {
 			rellenarListaEquipos(modelo);
 			//Para que se inice en la 1 fila porque la 1 vez no carga el evento del ValueChanged del listener 
 			//de la tabla
-			view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,0);
+			if(modelo.getRowCount()!=0) {
+				view.FrmEquipos.tabEquipos.getSelectionModel().setSelectionInterval(0,0);
+			}
 		} catch (SQLException e) {
 			Utilidades.gestionaErrorSql(e);
 		}

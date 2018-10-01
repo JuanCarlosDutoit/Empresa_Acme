@@ -35,18 +35,29 @@ public class LogicEmpleado {
 		//Tendriamos que comprobar que los datos enviados estan correctos
 			
 		conexion = DBsqlServer.establecerConexion();
+		
+		//Compruebo que hay datos en las tablas
 		//--> PASAR EL CODIGO DE EMPLEADO A IDENTITY PARA EVITAR ESTO
-		sqlQuery = "SELECT MAX(CODIGO_EMPLEADO) "
+		
+		sqlQuery = "SELECT COUNT(CODIGO_EMPLEADO) "
 				+  " FROM JCD_EMPLEADOS";
-			
 		rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
 		rowset.next();
-		n_codigo= Integer.parseInt(rowset.getString(1));
-		n_codigo++;
-		emp.setCodigo(n_codigo);
+		if(!rowset.getString(1).equals("0")) {
+		
+			sqlQuery = "SELECT MAX(CODIGO_EMPLEADO) "
+					+  " FROM JCD_EMPLEADOS";
 			
+			rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
+			rowset.next();
+			n_codigo= Integer.parseInt(rowset.getString(1));
+			n_codigo++;
+			emp.setCodigo(n_codigo);
+		}else {
+			emp.setCodigo(1);
+		}	
 		sqlQuery = "INSERT INTO JCD_EMPLEADOS VALUES"
-				+  "(" + String.valueOf(n_codigo) + ","
+				+  "(" + emp.getCodigo() + ","
 				+  "'" + emp.getNombre() + "',"
 				+  "'" + emp.getApellido() + "',"
 				+   emp.getGenero() + ","

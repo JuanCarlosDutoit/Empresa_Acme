@@ -25,9 +25,10 @@ public class CtrlProyectos {
 			modelo = logic.LogicProyectos.iniciaListaProyectos();
 			rellenarListaProyectos(modelo);
 			//1 linea como seleccionada
-			view.FrmProyectos.tabProyectos.getSelectionModel().setSelectionInterval(0,0);
+			if(modelo.getRowCount()!=0) {
+				view.FrmProyectos.tabProyectos.getSelectionModel().setSelectionInterval(0,0);
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			Utilidades.gestionaErrorSql(e);
 		}
 	}

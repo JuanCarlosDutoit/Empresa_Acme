@@ -18,9 +18,6 @@ public class LogicEquipos {
 		DefaultTableModel modelo;
 		Connection conexion;
 		
-		//conexion = DBsqlServer.conectarBD();
-		
-		DBsqlServer.crearCadenaConexion();
 		conexion = DBsqlServer.establecerConexion();
 		
 		sqlQuery = "SELECT CODIGO_EQUIPO,"
@@ -37,9 +34,7 @@ public class LogicEquipos {
 		String sqlQuery;
 		DefaultTableModel modelo;
 		Connection conexion;
-		
-		//conexion = DBsqlServer.conectarBD();
-		DBsqlServer.crearCadenaConexion();
+
 		conexion = DBsqlServer.establecerConexion();
 		
 		sqlQuery = "SELECT PEQ.CODIGO_PERSONAL,E.NOMBRE,E.APELLIDOS,C.NOMBRE PUESTO" 

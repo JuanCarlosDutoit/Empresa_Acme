@@ -46,52 +46,43 @@ public class LogicPersonal {
 		return rowset;
 	}
 
-	public static void addEmpleado(String empleado, String cargo) {
+	public static void addEmpleado(String empleado, String cargo) throws SQLException {
 		String sqlQuery;
 		Connection conexion;
 		CachedRowSet rowset;
-		String n_cargo;
 		int n_codigo;
 		
 		//Tendriamos que comprobar que los datos enviados estan correctos
 		
-		try {	
-			//conexion = DBsqlServer.conectarBD();
-			DBsqlServer.crearCadenaConexion();
-			conexion = DBsqlServer.establecerConexion();
+		conexion = DBsqlServer.establecerConexion();
 			
+		sqlQuery = "SELECT COUNT(CODIGO_PERSONAL) "
+				+  " FROM JCD_PERSONAL_EQUIPOS";
+		rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
+		rowset.next();
+		if (!rowset.getString(1).equals("0")) {
+		
 			sqlQuery = "SELECT MAX(CODIGO_PERSONAL) "
 					+  " FROM JCD_PERSONAL_EQUIPOS";
 			
 			rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
 			rowset.next();
-			n_codigo= Integer.parseInt(rowset.getString(1));
+			n_codigo = Integer.parseInt(rowset.getString(1));
 			n_codigo++;
+		}else {
+			n_codigo = 1;
+		}
 			
-			sqlQuery = "SELECT CODIGO_CARGO"
-					+  " FROM JCD_CARGOS"
-					+  " WHERE NOMBRE = '" + cargo + "'";
+		sqlQuery = "INSERT INTO JCD_PERSONAL_EQUIPOS VALUES"
+				+  "(" + String.valueOf(n_codigo) + ","
+				+  empleado + ","
+				+  CtrlEquipos.equipoSelecc + ","
+				+  cargo +")";
+		DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
+		DBsqlServer.cerrarConexion(conexion);
 			
-			rowset = DBsqlServer.ejecutarQuery(sqlQuery,conexion);
-			rowset.next();
-			n_cargo= rowset.getString(1);
-			
-			
-			sqlQuery = "INSERT INTO JCD_PERSONAL_EQUIPOS VALUES"
-					+  "(" + String.valueOf(n_codigo) + ","
-					+  empleado + ","
-					+  CtrlEquipos.equipoSelecc + ","
-					+  n_cargo +")";
-			DBsqlServer.ejecutarQueryUpdate(sqlQuery,conexion);
-			DBsqlServer.cerrarConexion(conexion);
-			
-			CtrlEquipos.cargarListaPersonal();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		
+		CtrlEquipos.cargarListaPersonal();
+					
 	}
 
 }
