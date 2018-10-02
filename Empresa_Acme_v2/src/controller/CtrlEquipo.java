@@ -39,7 +39,7 @@ public class CtrlEquipo {
 		case 1://Editar
 			rellenarDatosEquipo();
 			break;
-		case 2:
+		case 2://Info
 			rellenarDatosEquipo();
 			break;
 		}
@@ -49,7 +49,6 @@ public class CtrlEquipo {
 	private static void rellenarDatosEquipo() {
 		int fila;
 
-		System.out.println("Relleno datos del proyecto");
 		fila = view.FrmEquipos.tabEquipos.getSelectedRow();
 		
 		view.FrmEquipo.txtNombre.setText(String.valueOf(view.FrmEquipos.tabEquipos.getValueAt(fila, 1)));
@@ -85,5 +84,4 @@ public class CtrlEquipo {
 		
 	}		
 	
-
 }

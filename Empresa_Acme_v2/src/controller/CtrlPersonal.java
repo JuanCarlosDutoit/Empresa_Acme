@@ -43,7 +43,7 @@ public class CtrlPersonal {
 	public static void addPersonal() {
 		String empleado,cargo;
 		empleado = String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()).substring(0,String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()).indexOf("-"));
-		cargo =String.valueOf(FrmPersonal.cmbEmpleados.getSelectedItem()).substring(0,String.valueOf(FrmPersonal.cmbCargos.getSelectedItem()).indexOf("-"));
+		cargo =String.valueOf(FrmPersonal.cmbCargos.getSelectedItem()).substring(0,String.valueOf(FrmPersonal.cmbCargos.getSelectedItem()).indexOf("-"));
 		try {
 			logic.LogicPersonal.addEmpleado(empleado,cargo);
 		} catch (SQLException e) {

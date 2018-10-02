@@ -67,6 +67,9 @@ public class CtrlEquipos {
 		try {
 			modelo = logic.LogicEquipos.iniciaListaPersonal();
 			rellenarListaPersonal(modelo);
+			if(modelo.getRowCount()!=0) {
+				view.FrmEquipos.tabPersonal.getSelectionModel().setSelectionInterval(0,0);
+			}
 		} catch (SQLException e) {
 			Utilidades.gestionaErrorSql(e);
 		}

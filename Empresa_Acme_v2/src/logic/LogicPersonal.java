@@ -14,8 +14,6 @@ public class LogicPersonal {
 		String sqlQuery;
 		Connection conexion;
 		
-		//conexion = DBsqlServer.conectarBD();
-		DBsqlServer.crearCadenaConexion();
 		conexion = DBsqlServer.establecerConexion();
 		
 		sqlQuery = "SELECT CODIGO_EMPLEADO,NOMBRE,APELLIDOS "
@@ -34,8 +32,6 @@ public class LogicPersonal {
 		String sqlQuery;
 		Connection conexion;
 		
-		//conexion = DBsqlServer.conectarBD();
-		DBsqlServer.crearCadenaConexion();
 		conexion = DBsqlServer.establecerConexion();
 		
 		sqlQuery = "SELECT CODIGO_CARGO,NOMBRE "
